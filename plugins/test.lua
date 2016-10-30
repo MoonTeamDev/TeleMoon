@@ -2455,6 +2455,7 @@ return {
 	"^[#!/]([Dd]emoteadmin)",
 	"^[#!/]([Ss]etowner) (.*)$",
 	"^[#!/]([Ss]etowner)$",
+        "^[#!/]([Ss]ettings)$",
 	"^[#!/]([Pp]romote) (.*)$",
 	"^[#!/]([Pp]romote)",
 	"^[#!/]([Dd]emote) (.*)$",
