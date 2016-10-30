@@ -893,6 +893,56 @@ function show_supergroup_settingsmod(msg, target)
 			data[tostring(target)]['settings']['public'] = 'no'
 		end
 	end
+if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['tag'] then
+			data[tostring(target)]['settings']['tag'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['emoji'] then
+			data[tostring(target)]['settings']['emoji'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['english'] then
+			data[tostring(target)]['settings']['english'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['fwd'] then
+			data[tostring(target)]['settings']['fwd'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['reply'] then
+			data[tostring(target)]['settings']['reply'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['join'] then
+			data[tostring(target)]['settings']['join'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['fosh'] then
+			data[tostring(target)]['settings']['fosh'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['username'] then
+			data[tostring(target)]['settings']['username'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['media'] then
+			data[tostring(target)]['settings']['media'] = 'no'
+		end
+	end
+	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['leave'] then
+			data[tostring(target)]['settings']['leave'] = 'no'
+		end
+	end
 	if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_rtl'] then
 			data[tostring(target)]['settings']['lock_rtl'] = 'no'
