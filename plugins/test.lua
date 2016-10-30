@@ -888,6 +888,10 @@ function show_supergroup_settingsmod(msg, target)
         	NUM_MSG_MAX = 5
       	end
     end
+    local bots_protection = "yes"
+    if data[tostring(target)]['settings']['lock_bots'] then
+        bots_protection = data[tostring(target)]['settings']['lock_bots']
+        end
 	if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['public'] then
 			data[tostring(target)]['settings']['public'] = 'no'
