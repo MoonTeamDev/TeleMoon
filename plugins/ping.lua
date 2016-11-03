@@ -41,9 +41,9 @@ local function run(msg, matches)
     end
 return {
 	patterns = {
-"^[!#/]([Pp][Ii][Nn][Gg])$",
-"^[!#/]([Bb][Oo][Tt]$",
-"^[!#/]([Tt][Ii][Kk]$",
+"^[!#/]ping$",
+"^[!#/]bot$",
+"^[!#/]tik$",
 },
 run = run,
 }
