@@ -199,38 +199,6 @@ local text = text..'Msg: '..msg_type..'\n\n'
 		  else
 		   text = text..'Rank: '..value..'\n\n'
 		 end
-         local user_info = {} 
-  local uhash = 'user:'..result.from.peer_id
-  local user = redis:hgetall(uhash)
-  local um_hash = 'msgs:'..result.from.peer_id..':'..result.to.peer_id
-  user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'User msgs: '..user_info_msgs..'\n\n'
-local uhash = 'user:'..result.from.peer_id
- 	 local user = redis:hgetall(uhash)
-  	 local banhash = 'addedbanuser:'..result.to.peer_id..':'..result.from.peer_id
-	 user_info_addedbanuser = tonumber(redis:get(banhash) or 0)
-text = text..'Add ban user: '..user_info_addedbanuser..'\n\n'
-local uhash = 'user:'..result.from.peer_id
- 	 local user = redis:hgetall(uhash)
-  	 local um_hash = 'gban:spam'..result.from.peer_id
-	 user_info_gbanspam = tonumber(redis:get(um_hash) or 0)
-	 text = text..'Spam in group: '..user_info_gbanspam..'\n\nGROUP INFORMATION\n\n'
-local uhash = 'user:'..result.from.peer_id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'kicked:'..result.from.peer_id..':'..result.to.peer_id
-	 user_info_kicked = tonumber(redis:get(um_hash) or 0)
-text = text..'Kicked users: '..user_info_kicked..'\n'
-local uhash = 'user:'..result.from.peer_id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'muted:'..result.from.peer_id..':'..result.to.peer_id
-	 user_info_muted = tonumber(redis:get(um_hash) or 0)
-text = text..'Muted users: '..user_info_muted..'\n'
-local uhash = 'user:'..result.from.peer_id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'banned:'..result.from.peer_id..':'..result.to.peer_id
-	 user_info_banned = tonumber(redis:get(um_hash) or 0)
-text = text..'Banned users: '..user_info_banned..'\n\n'
-
   text = text
   send_msg(extra.receiver, text, ok_cb, true)
 end
