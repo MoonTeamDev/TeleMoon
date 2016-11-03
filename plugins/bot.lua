@@ -1,12 +1,14 @@
-do
-
-local function run(msg)
-   if msg.text == "tik" then
-  return "<b>tak</b>"
- end
+local datebase = {
+  "<b>ONLINE</b>",
+  "<i>ONLINE</i>",
+  "<code>ONLINE</code>",
+  }
+local function run(msg, matches)
+return datebase[math.random(#datebase)]
+end
 return {
-    patterns = {
-    "^tik"
-},
-run = run,
+  patterns = {
+    "^[!#/]([Bb][Oo][Tt])",
+  },
+  run = run
 }
