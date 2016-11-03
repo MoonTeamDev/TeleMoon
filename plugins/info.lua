@@ -9,7 +9,7 @@ local function setrank(msg, name, value,receiver) -- setrank function
 
   if hash then
     redis:hset(hash, name, value)
-	return send_msg(receiver, '('..name..')'s rank changed to: '..value..', ok_cb,  true)
+	return send_msg(receiver, '('..name..') rank changed to: '..value..'', ok_cb,  true)
   end
 end
 
