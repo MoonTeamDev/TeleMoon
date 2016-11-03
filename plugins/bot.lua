@@ -1,7 +1,7 @@
 local datebase = {
-  "<b>ONLINE</b>",
-  "<i>ONLINE</i>",
-  "<code>ONLINE</code>",
+  "<b>What</b>😐",
+  "<i>Im here</i>😒",
+  "<code>Im ok</code>",
   }
 local function run(msg, matches)
 return datebase[math.random(#datebase)]
