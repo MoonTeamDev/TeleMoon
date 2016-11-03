@@ -315,8 +315,8 @@ elseif string.sub(msg.from.phone, 0,1) == '1' then
    local text = text..'یوزرنیم : '..Username..'\n'
    local text = text..'ایدی : '..msg.from.id..'\n\n'
 	  local text = text..'شماره تلفن : '..number..'\n'
-	local text = text..'زمان : '..jdat.FAtime..'\n'
-	local text = text..'تاریخ  : '..jdat.FAdate..'\n\n'
+	local text = text..'زمان : '..jdat.ENtime..'\n'
+	local text = text..'تاریخ  : '..jdat.ENdate..'\n\n'
    local hash = 'rank:variables'
 	if hash then
 	  local value = redis:hget(hash, msg.from.id)
