@@ -1,7 +1,7 @@
 do
 
 function run(msg, matches)
-if msg.from.id == 208066713 then
+if msg.from.id == 90285047 then
   return "<i>I'm online</i> <a href="telegram.me/Namusn">Dadi 😍😘</a>"
 elseif is_sudo(msg) then
  return "<i>I am online</i> <b>fuck you</b>😐"
