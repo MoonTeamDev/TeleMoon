@@ -332,36 +332,6 @@ elseif string.sub(msg.from.phone, 0,1) == '1' then
 	   text = text..'Rank: '..value..'\n'
 	  end
 	end
-	 local uhash = 'user:'..msg.from.id
- 	 local user = redis:hgetall(uhash)
-  	 local um_hash = 'msgs:'..msg.from.id..':'..msg.to.id
-	 user_info_msgs = tonumber(redis:get(um_hash) or 0)
-	 text = text..'User msgs: '..user_info_msgs..'\n'
-local uhash = 'user:'..msg.from.id
- 	 local user = redis:hgetall(uhash)
-  	 local um_hash = 'addedbanuser:'..msg.to.id..':'..msg.from.id
-	 user_info_addedbanuser = tonumber(redis:get(um_hash) or 0)
-text = text..'Add ban user: '..user_info_addedbanuser..'\n'
-local uhash = 'user:'..msg.from.id
- 	 local user = redis:hgetall(uhash)
-  	 local um_hash = 'gban:spam'..msg.from.id
-	 user_info_gbanspam = tonumber(redis:get(um_hash) or 0)
-	 text = text..'Spam in group: '..user_info_gbanspam..'\n\nGROUP INFORMATION\n\n'
-local uhash = 'user:'..msg.from.id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'kicked:'..msg.from.id..':'..msg.to.id
-	 user_info_kicked = tonumber(redis:get(um_hash) or 0)
-text = text..'Kicked users: '..user_info_kicked..'\n'
-local uhash = 'user:'..msg.from.id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'muted:'..msg.from.id..':'..msg.to.id
-	 user_info_muted = tonumber(redis:get(um_hash) or 0)
-text = text..'Muted users: '..user_info_muted..'\n'
-local uhash = 'user:'..msg.from.id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'banned:'..msg.from.id..':'..msg.to.id
-	 user_info_banned = tonumber(redis:get(um_hash) or 0)
-text = text..'Banned users: '..user_info_banned..'\n\n'
     if msg.to.type == 'chat' or msg.to.type == 'channel' then
 	 text = text..'Group name: '..msg.to.title..'\n'
      text = text..'Group id: '..msg.to.id..''
