@@ -102,48 +102,48 @@ local function action_by_reply(extra, success, result)-- (reply) /info  function
 if result.media then
 		if result.media.type == "document" then
 			if result.media.text then
-				msg_type = "استیکر"
+				msg_type = "Sticker"
 			else
-				msg_type = "ساير فايلها"
+				msg_type = "Files"
 			end
 		elseif result.media.type == "photo" then
-			msg_type = "فايل عکس"
+			msg_type = "Photo"
 		elseif result.media.type == "video" then
-			msg_type = "فايل ويدئويي"
+			msg_type = "Video"
 		elseif result.media.type == "audio" then
-			msg_type = "فايل صوتي"
+			msg_type = "Audio"
 		elseif result.media.type == "geo" then
-			msg_type = "موقعيت مکاني"
+			msg_type = "Location"
 		elseif result.media.type == "contact" then
-			msg_type = "شماره تلفن"
+			msg_type = "Contact"
 		elseif result.media.type == "file" then
-			msg_type = "فايل"
+			msg_type = "File"
 		elseif result.media.type == "webpage" then
-			msg_type = "پیش نمایش سایت"
+			msg_type = "Webpage"
 		elseif result.media.type == "unsupported" then
-			msg_type = "فايل متحرک"
+			msg_type = "Gif"
 		else
-			msg_type = "ناشناخته"
+			msg_type = "?"
 		end
 	elseif result.text then
 		if string.match(result.text, '^%d+$') then
-			msg_type = "عدد"
+			msg_type = "Number"
 		elseif string.match(result.text, '%d+') then
-			msg_type = "شامل عدد و حروف"
+			msg_type = "Number and script"
 		elseif string.match(result.text, '^@') then
-			msg_type = "یوزرنیم"
+			msg_type = "Username"
 		elseif string.match(result.text, '@') then
-			msg_type = "شامل یوزرنیم"
+			msg_type = "Username"
 		elseif string.match(result.text, '[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]') then
-			msg_type = "لينک تلگرام"
+			msg_type = "Telegram links"
 elseif string.match(result.text, '[Hh][Tt][Tt][Pp]') then
-			msg_type = "لينک سايت"
+			msg_type = "Telegram or site links"
 		elseif string.match(result.text, '[Ww][Ww][Ww]') then
-			msg_type = "لينک سايت"
+			msg_type = "Site links"
 		elseif string.match(result.text, '?') then
-			msg_type = "پرسش"
+			msg_type = "Question"
 		else
-			msg_type = "متن عادی"
+			msg_type = "Text"
 		end
 	end
 if result.from.phone then
