@@ -370,10 +370,6 @@ text = text..'🔘تعداد افراد بن کرده  : '..user_info_banned..'\
     return reply_msg(msg.id, text, ok_cb, false)
     end
   end
-    if msg.to.type == 'chat' or msg.to.type == 'channel' then
-	 text = text..'Group name: '..msg.to.title..'\n'
-     text = text..'Groip id: '..msg.to.id..''
-    end
 	text = text
     return reply_msg(msg.id, text, ok_cb, false)
     end
