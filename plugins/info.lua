@@ -283,28 +283,28 @@ if msg.from.phone then
 				numberorg = string.sub(msg.from.phone, 3)
 				number = "****0"..string.sub(numberorg, 0,6)
 				if string.sub(msg.from.phone, 0,2) == '98' then
-					number = number.."\nکشور: جمهوری اسلامی ایران"
+					number = number.."\nLocation: iran islamic"
 					if string.sub(msg.from.phone, 0,4) == '9891' then
-						number = number.."\nنوع سیمکارت: همراه اول"
+						number = number.."\nSim: ir-mci"
 					elseif string.sub(msg.from.phone, 0,5) == '98932' then
-						number = number.."\nنوع سیمکارت: تالیا"
+						number = number.."\nSim: talia"
 					elseif string.sub(msg.from.phone, 0,4) == '9893' then
-						number = number.."\nنوع سیمکارت: ایرانسل"
+						number = number.."\nSim: irancell"
 					elseif string.sub(msg.from.phone, 0,4) == '9890' then
-						number = number.."\nنوع سیمکارت: ایرانسل"
+						number = number.."\nSim: irancell"
 					elseif string.sub(msg.from.phone, 0,4) == '9892' then
-						number = number.."\nنوع سیمکارت: رایتل"
+						number = number.."\nSim: rightel"
 					else
-						number = number.."\nنوع سیمکارت: سایر"
+						number = number.."\nSim: ?"
 					end
 elseif string.sub(msg.from.phone, 0,2) == '63' then
-					number = number.."\nکشور: فیلیپین "
+					number = number.."\nLocation: philipins"
 				elseif string.sub(msg.from.phone, 0,2) == '62' then
-					number = number.."\n کشور: اندونزی "
+					number = number.."\nLocation: indonesia"
 elseif string.sub(msg.from.phone, 0,1) == '1' then
-					number = number.."\n کشور: کانادا "
+					number = number.."\nLocation: usa/canada"
 				else
-					number = number.."\nکشور: خارج\nنوع سیمکارت: متفرقه"
+					number = number.."\nLocation: ?\nSim: ?"
 				end
 			else
 				number = "-----"
