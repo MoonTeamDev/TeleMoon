@@ -1,8 +1,6 @@
 
 do
-local Arian = 173979569 --put your id here(BOT OWNER ID)
-local Sosha = 173666523
---local Sosha2 = 164484149
+local Arian = 90285047
 
 local function setrank(msg, name, value,receiver) -- setrank function
   local hash = nil
@@ -11,7 +9,7 @@ local function setrank(msg, name, value,receiver) -- setrank function
 
   if hash then
     redis:hset(hash, name, value)
-	return send_msg(receiver, 'مقام برای  ('..name..') به  : '..value..' تغییر یافت', ok_cb,  true)
+	return send_msg(receiver, '('..name..') Rank changed to: '..value..'', ok_cb,  true)
   end
 end
 
@@ -23,35 +21,31 @@ local function res_user_callback(extra, success, result) -- /info <username> fun
    else
    Username = '----'
   end
-    local text = 'نام کامل : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
-               ..'یوزر نیم: '..Username..'\n'
-               ..'ایدی : '..result.peer_id..'\n\n'
+    local text = 'Name: '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
+               ..'Username: '..Username..'\n'
+               ..'Id: '..result.peer_id..'\n\n'
 	local hash = 'rank:variables'
 	local value = redis:hget(hash, result.peer_id)
     if not value then
 	 if result.peer_id == tonumber(Arian) then
-	   text = text..'مقام : Bot creator \n\n'
-	   elseif result.peer_id == tonumber(Sosha) then
-	   text = text..'Rank : مدیر ارشد ربات (Full Access Admin) \n\n'
-	   --elseif result.peer_id == tonumber(Sosha2) then
-	   --text = text..'Rank : مدیر ارشد ربات (Full Access Admin) \n\n'
+	   text = text..'Rank: Sudo \n\n then
 	  elseif is_admin2(result.peer_id) then
-	   text = text..'مقام : ادمین \n\n'
+	   text = text..'Rank: Admin\n\n'
 	  elseif is_owner2(result.peer_id, extra.chat2) then
-	   text = text..'مقام : مدیر گروه \n\n'
+	   text = text..'Rank: Owner \n\n'
 	  elseif is_momod2(result.peer_id, extra.chat2) then
-	    text = text..'مقام : مدیر \n\n'
+	    text = text..'Rank: moderator \n\n'
       else
-	    text = text..'مقام : کاربر \n\n'
+	    text = text..'Rank: User \n\n'
 	 end
    else
-   text = text..'مقام : '..value..'\n\n'
+   text = text..'Rank: '..value..'\n\n'
   end
   local uhash = 'user:'..result.peer_id
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.peer_id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'تعداد پیام های فرستاده : : '..user_info_msgs..'\n\n'
+  text = text..'User msgs: : '..user_info_msgs..'\n\n'
   text = text
   send_msg(extra.receiver, text, ok_cb,  true)
   else
@@ -66,35 +60,31 @@ local function action_by_id(extra, success, result)  -- /info <ID> function
    else
    Username = '----'
  end
-   local text = 'نام کامل : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
-               ..'یوزرنیم: '..Username..'\n'
-               ..'ایدی : '..result.peer_id..'\n\n'
-  local hash = 'rank:variables'
-  local value = redis:hget(hash, result.peer_id)
-  if not value then
+   local text = 'Name: '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
+               ..'Username: '..Username..'\n'
+               ..'Id: '..result.peer_id..'\n\n'
+	local hash = 'rank:variables'
+	local value = redis:hget(hash, result.peer_id)
+    if not value then
 	 if result.peer_id == tonumber(Arian) then
-	   text = text..'مقام : BOT Creator \n\n'
-	   elseif result.peer_id == tonumber(Sosha) then
-	   text = text..'مقام : مدیر ارشد ربات (Full Access Admin) \n\n'
-	   elseif result.peer_id == tonumber(Sosha2) then
-	   text = text..'مقام : مدیر ارشد ربات (Full Access Admin) \n\n'
+	   text = text..'Rank: Sudo \n\n then
 	  elseif is_admin2(result.peer_id) then
-	   text = text..'مقام : ادمین \n\n'
+	   text = text..'Rank: Admin\n\n'
 	  elseif is_owner2(result.peer_id, extra.chat2) then
-	   text = text..'مقام : مدیر گروه \n\n'
+	   text = text..'Rank: Owner \n\n'
 	  elseif is_momod2(result.peer_id, extra.chat2) then
-	   text = text..'مقام : مدیر \n\n'
-	  else
-	   text = text..'مقام : کاربر \n\n'
-	  end
+	    text = text..'Rank: moderator \n\n'
+      else
+	    text = text..'Rank: User \n\n'
+	 end
    else
-    text = text..'مقام : '..value..'\n\n'
+   text = text..'Rank: '..value..'\n\n'
   end
   local uhash = 'user:'..result.peer_id
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.peer_id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'تعداد پیام های کاربر : '..user_info_msgs..'\n\n'
+  text = text..'User msgs: '..user_info_msgs..'\n\n'
   text = text
   send_msg(extra.receiver, text, ok_cb,  true)
   else
@@ -112,123 +102,119 @@ local function action_by_reply(extra, success, result)-- (reply) /info  function
 if result.media then
 		if result.media.type == "document" then
 			if result.media.text then
-				msg_type = "استیکر"
+				msg_type = "Sticker"
 			else
-				msg_type = "ساير فايلها"
+				msg_type = "Files"
 			end
 		elseif result.media.type == "photo" then
-			msg_type = "فايل عکس"
+			msg_type = "Photo"
 		elseif result.media.type == "video" then
-			msg_type = "فايل ويدئويي"
+			msg_type = "Video"
 		elseif result.media.type == "audio" then
-			msg_type = "فايل صوتي"
+			msg_type = "Audio"
 		elseif result.media.type == "geo" then
-			msg_type = "موقعيت مکاني"
+			msg_type = "Location"
 		elseif result.media.type == "contact" then
-			msg_type = "شماره تلفن"
+			msg_type = "Contact"
 		elseif result.media.type == "file" then
-			msg_type = "فايل"
+			msg_type = "File"
 		elseif result.media.type == "webpage" then
-			msg_type = "پیش نمایش سایت"
+			msg_type = "Webpage"
 		elseif result.media.type == "unsupported" then
-			msg_type = "فايل متحرک"
+			msg_type = "Gif"
 		else
-			msg_type = "ناشناخته"
+			msg_type = "no info"
 		end
 	elseif result.text then
 		if string.match(result.text, '^%d+$') then
-			msg_type = "عدد"
+			msg_type = "Number"
 		elseif string.match(result.text, '%d+') then
-			msg_type = "شامل عدد و حروف"
+			msg_type = "Number and script"
 		elseif string.match(result.text, '^@') then
-			msg_type = "یوزرنیم"
+			msg_type = "Username"
 		elseif string.match(result.text, '@') then
-			msg_type = "شامل یوزرنیم"
+			msg_type = "Username"
 		elseif string.match(result.text, '[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]') then
-			msg_type = "لينک تلگرام"
+			msg_type = "Telegram links"
 elseif string.match(result.text, '[Hh][Tt][Tt][Pp]') then
-			msg_type = "لينک سايت"
+			msg_type = "Telegram or sites link"
 		elseif string.match(result.text, '[Ww][Ww][Ww]') then
-			msg_type = "لينک سايت"
+			msg_type = "Site link"
 		elseif string.match(result.text, '?') then
-			msg_type = "پرسش"
+			msg_type = "Question"
 		else
-			msg_type = "متن عادی"
+			msg_type = "Text"
 		end
 	end
 if result.from.phone then
 				numberorg = string.sub(result.from.phone, 3)
 				number = "****0"..string.sub(numberorg, 0,6)
 				if string.sub(result.from.phone, 0,2) == '98' then
-					number = number.."\nکشور: جمهوری اسلامی ایران"
+					number = number.."\nLocation: iran islamic"
 					if string.sub(result.from.phone, 0,4) == '9891' then
-						number = number.."\nنوع سیمکارت: همراه اول"
+						number = number.."\nSim: ir-mci"
 					elseif string.sub(result.from.phone, 0,5) == '98932' then
-						number = number.."\nنوع سیمکارت: تالیا"
+						number = number.."\nSim: talia"
 					elseif string.sub(result.from.phone, 0,4) == '9893' then
-						number = number.."\nنوع سیمکارت: ایرانسل"
+						number = number.."\nSim: irancell"
 					elseif string.sub(result.from.phone, 0,4) == '9890' then
-						number = number.."\nنوع سیمکارت: ایرانسل"
+						number = number.."\nSim: irancell"
 					elseif string.sub(result.from.phone, 0,4) == '9892' then
-						number = number.."\nنوع سیمکارت: رایتل"
+						number = number.."\nSim: rightel"
 					else
-						number = number.."\nنوع سیمکارت: سایر"
+						number = number.."\nSim: ?"
 					end
 elseif string.sub(result.from.phone, 0,2) == '63' then
-					number = number.."\nکشور: فیلیپین "
+					number = number.."\nLocation: philipins"
 				elseif string.sub(result.from.phone, 0,2) == '62' then
-					number = number.."\n کشور: اندونزی "
+					number = number.."\nLocation: indonesia"
 elseif string.sub(result.from.phone, 0,1) == '1' then
-					number = number.."\n کشور: کانادا "
+					number = number.."\nLocation: usa/canada"
 				else
-					number = number.."\nکشور: خارج\nنوع سیمکارت: متفرقه"
+					number = number.."\nLocation: ?\nSim: ?"
 				end
 			else
 				number = "-----"
 			end
 
-  local text = 'نام کامل : '..(result.from.first_name or '')..' '..(result.from.last_name or '')..'\n'
-               ..'یوزرنیم : '..Username..'\n\n'
-local text = text..'شماره تلفن : '..number..'\n\n'
-local text = text..'نوع متن : '..msg_type..'\n\n'
-               ..'ایدی : '..result.from.peer_id..'\n\n'
+  local text = 'Full name: '..(result.from.first_name or '')..' '..(result.from.last_name or '')..'\n'
+               ..'Username: '..Username..'\n\n'
+local text = text..'Phone number: '..number..'\n\n'
+local text = text..'Msg: '..msg_type..'\n\n'
+               ..'Id: '..result.from.peer_id..'\n\n'
 	local hash = 'rank:variables'
 		local value = redis:hget(hash, result.from.peer_id)
 		 if not value then
 		    if result.from.peer_id == tonumber(Arian) then
-		       text = text..'مقام : BOT Creator \n\n'
-			   elseif result.peer_id == tonumber(Sosha) then
-	           text = text..'مقام : مدیر ارشد ربات (Full Access Admin) \n\n'
-	          --elseif result.peer_id == tonumber(Sosha2) then
-	          --text = text..'Rank : مدیر ارشد ربات (Full Access Admin) \n\n'
+		       text = text..'Rank: Sudo \n\n'
 		     elseif is_admin2(result.from.peer_id) then
-		       text = text..'مقام : ادمین \n\n'
+		       text = text..'Rank: Admin \n\n'
 		     elseif is_owner2(result.from.peer_id, result.to.id) then
-		       text = text..'مقام : لیدر گروه \n\n'
+		       text = text..'Rank: Owner \n\n'
 		     elseif is_momod2(result.from.peer_id, result.to.id) then
-		       text = text..'مقام : مدیر \n\n'
+		       text = text..'Rank: Moderators \n\n'
 		 else
-		       text = text..'مقام : کاربر \n\n'
+		       text = text..'Rank: User \n\n'
 			end
 		  else
-		   text = text..'مقام : '..value..'\n\n'
+		   text = text..'Rank: '..value..'\n\n'
 		 end
          local user_info = {} 
   local uhash = 'user:'..result.from.peer_id
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.from.peer_id..':'..result.to.peer_id
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'⭐تعداد پیام های کاربر : '..user_info_msgs..'\n\n'
+  text = text..'User msgs: '..user_info_msgs..'\n\n'
 local uhash = 'user:'..result.from.peer_id
  	 local user = redis:hgetall(uhash)
   	 local banhash = 'addedbanuser:'..result.to.peer_id..':'..result.from.peer_id
 	 user_info_addedbanuser = tonumber(redis:get(banhash) or 0)
-text = text..'⭐تعداد خطا در اضافه کردن کاربر بن شده: '..user_info_addedbanuser..'\n\n'
+text = text..'Add ban user: '..user_info_addedbanuser..'\n\n'
 local uhash = 'user:'..result.from.peer_id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'gban:spam'..result.from.peer_id
 	 user_info_gbanspam = tonumber(redis:get(um_hash) or 0)
-	 text = text..'⭐تعداد دفعات اسپم در گروه ها: '..user_info_gbanspam..'\n-------------------------------------------------\nℹ
+	 text = text..'Spam in group: '..user_info_gbanspam..'\n-------------------------------------------------\nℹ
 
 local function action_by_reply2(extra, success, result)
 local value = extra.value
@@ -240,7 +226,7 @@ local function run(msg, matches)
   local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
   redis:incr(hash)
   if not is_sudo(msg) then
-    return "این دستور فقط برای ادمین های اصلی ربات فعال می باشد"
+    return "Sudo only!"
   end
   local receiver = get_receiver(msg)
   local Reply = msg.reply_id
@@ -271,82 +257,80 @@ if res ~= 200 then return "No connection" end
 local jdat = json:decode(url)
 -----------
 if msg.from.phone then
-				numberorg = string.sub(msg.from.phone, 3)
+				numberorg = string.sub(result.from.phone, 3)
 				number = "****0"..string.sub(numberorg, 0,6)
-				if string.sub(msg.from.phone, 0,2) == '98' then
-					number = number.."\nکشور: جمهوری اسلامی ایران"
-					if string.sub(msg.from.phone, 0,4) == '9891' then
-						number = number.."\nنوع سیمکارت: همراه اول"
-					elseif string.sub(msg.from.phone, 0,5) == '98932' then
-						number = number.."\nنوع سیمکارت: تالیا"
-					elseif string.sub(msg.from.phone, 0,4) == '9893' then
-						number = number.."\nنوع سیمکارت: ایرانسل"
-					elseif string.sub(msg.from.phone, 0,4) == '9890' then
-						number = number.."\nنوع سیمکارت: ایرانسل"
-					elseif string.sub(msg.from.phone, 0,4) == '9892' then
-						number = number.."\nنوع سیمکارت: رایتل"
+				if string.sub(result.from.phone, 0,2) == '98' then
+					number = number.."\nLocation: iran islamic"
+					if string.sub(result.from.phone, 0,4) == '9891' then
+						number = number.."\nSim: ir-mci"
+					elseif string.sub(result.from.phone, 0,5) == '98932' then
+						number = number.."\nSim: talia"
+					elseif string.sub(result.from.phone, 0,4) == '9893' then
+						number = number.."\nSim: irancell"
+					elseif string.sub(result.from.phone, 0,4) == '9890' then
+						number = number.."\nSim: irancell"
+					elseif string.sub(result.from.phone, 0,4) == '9892' then
+						number = number.."\nSim: rightel"
 					else
-						number = number.."\nنوع سیمکارت: سایر"
+						number = number.."\nSim: ?"
 					end
-elseif string.sub(msg.from.phone, 0,2) == '63' then
-					number = number.."\nکشور: فیلیپین "
-				elseif string.sub(msg.from.phone, 0,2) == '62' then
-					number = number.."\n کشور: اندونزی "
-elseif string.sub(msg.from.phone, 0,1) == '1' then
-					number = number.."\n کشور: کانادا "
+elseif string.sub(result.from.phone, 0,2) == '63' then
+					number = number.."\nLocation: philipins"
+				elseif string.sub(result.from.phone, 0,2) == '62' then
+					number = number.."\nLocation: indonesia"
+elseif string.sub(result.from.phone, 0,1) == '1' then
+					number = number.."\nLocation: usa/canada"
 				else
-					number = number.."\nکشور: خارج\nنوع سیمکارت: متفرقه"
+					number = number.."\nLocation: ?\nSim: ?"
 				end
 			else
 				number = "-----"
 			end
 --------------------
-   local text = 'نام: '..(msg.from.first_name or '----')..'\n'
-   local text = text..'فامیل : '..(msg.from.last_name or '----')..'\n'	
-   local text = text..'یوزرنیم : '..Username..'\n'
-   local text = text..'ایدی : '..msg.from.id..'\n\n'
-	  local text = text..'شماره تلفن : '..number..'\n'
-	local text = text..'زمان : '..jdat.FAtime..'\n'
-	local text = text..'تاریخ  : '..jdat.FAdate..'\n\n'
+   local text = 'First name: '..(msg.from.first_name or '----')..'\n'
+   local text = text..'Last name: '..(msg.from.last_name or '----')..'\n'	
+   local text = text..'Username: '..Username..'\n'
+   local text = text..'Id: '..msg.from.id..'\n\n'
+	  local text = text..'Phone number: '..number..'\n'
+	local text = text..'Time: '..jdat.FAtime..'\n'
+	local text = text..'Date: '..jdat.FAdate..'\n\n'
    local hash = 'rank:variables'
 	if hash then
 	  local value = redis:hget(hash, msg.from.id)
 	  if not value then
 		if msg.from.id == tonumber(Arian) then
-		 text = text..'مقام : BOT Creator \n\n'
-		 elseif msg.from.id == tonumber(Sosha) then
-		 text = text..'مقام : Full Access Admin \n\n'
+		 text = text..'Rank: Sudo \n\n'
 		elseif is_admin1(msg) then
-		 text = text..'مقام : ادمین \n\n'
+		 text = text..'Rank: Admin \n\n'
 		elseif is_owner(msg) then
-		 text = text..'مقام : مدیر گروه \n\n'
+		 text = text..'Rank: Owner \n\n'
 		elseif is_momod(msg) then
-		 text = text..'مقام : مدیر \n\n'
+		 text = text..'Rank: Moderators \n\n'
 		else
-		 text = text..'مقام : کاربر \n\n'
+		 text = text..'Rank: User \n\n'
 		end
 	  else
-	   text = text..'مقام : '..value..'\n'
+	   text = text..'Rank: '..value..'\n'
 	  end
 	end
 	 local uhash = 'user:'..msg.from.id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'msgs:'..msg.from.id..':'..msg.to.id
 	 user_info_msgs = tonumber(redis:get(um_hash) or 0)
-	 text = text..'⭐تعداد پیام های کاربر: '..user_info_msgs..'\n'
+	 text = text..'User msgs: '..user_info_msgs..'\n'
 local uhash = 'user:'..msg.from.id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'addedbanuser:'..msg.to.id..':'..msg.from.id
 	 user_info_addedbanuser = tonumber(redis:get(um_hash) or 0)
-text = text..'⭐تعداد خطا در اضافه کردن کاربر بن شده : '..user_info_addedbanuser..'\n'
+text = text..'Add ban user: '..user_info_addedbanuser..'\n'
 local uhash = 'user:'..msg.from.id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'gban:spam'..msg.from.id
 	 user_info_gbanspam = tonumber(redis:get(um_hash) or 0)
-	 text = text..'⭐تعداد دفعات اسپم در گروه ها: '..user_info_gbanspam..'\n-------------------------------------------------\nℹ
+	 text = text..'Spam in group: '..user_info_gbanspam..'\n-------------------------------------------------\nℹ
     if msg.to.type == 'chat' or msg.to.type == 'channel' then
-	 text = text..'نام گروه : '..msg.to.title..'\n'
-     text = text..'ایدی گروه : '..msg.to.id..''
+	 text = text..'Group name: '..msg.to.title..'\n'
+     text = text..'Groip id: '..msg.to.id..''
     end
 	text = text
     return reply_msg(msg.id, text, ok_cb, false)
