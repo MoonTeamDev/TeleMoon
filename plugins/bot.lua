@@ -15,7 +15,6 @@ return datebase[math.random(#datebase)]
 end
 return {
   patterns = {
-    "^[/!#][Pp][Ii][Nn][Gg]",
     "^[/!#][Bb][Oo][Tt]",
   },
   run = run
