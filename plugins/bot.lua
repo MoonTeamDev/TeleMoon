@@ -1,13 +1,13 @@
 local datebase = {
   "What the hell are you doing😐",
-  "<b>I'm here mother fucker  
+  "I'm here mother fucker  
         /🖕
  (°·°)/
  / | /
 /  | 
  \ |8=====D
   / \
- /   \</b>",
+ /   \",
   "Im here😒",
   }
 local function run(msg, matches)
