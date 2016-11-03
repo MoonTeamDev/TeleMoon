@@ -9,7 +9,7 @@ local function setrank(msg, name, value,receiver) -- setrank function
 
   if hash then
     redis:hset(hash, name, value)
-	return send_msg(receiver, 'مقام برای  ('..name..') به  : '..value..' تغییر یافت', ok_cb,  true)
+	return send_msg(receiver, '('..name..') Rank changed to: '..value..'', ok_cb,  true)
   end
 end
 
@@ -21,31 +21,31 @@ local function res_user_callback(extra, success, result) -- /info <username> fun
    else
    Username = '----'
   end
-    local text = 'نام کامل : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
-               ..'یوزر نیم: '..Username..'\n'
-               ..'ایدی : '..result.peer_id..'\n\n'
+    local text = 'Full name : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
+               ..'Username: '..Username..'\n'
+               ..'Id: '..result.peer_id..'\n\n'
 	local hash = 'rank:variables'
 	local value = redis:hget(hash, result.peer_id)
     if not value then
 	 if result.peer_id == tonumber(Arian) then
-	   text = text..'مقام : Bot creator \n\n'
+	   text = text..'Rank: Sudo \n\n'
 	  elseif is_admin2(result.peer_id) then
-	   text = text..'مقام : ادمین \n\n'
+	   text = text..'Rank: Admin \n\n'
 	  elseif is_owner2(result.peer_id, extra.chat2) then
-	   text = text..'مقام : مدیر گروه \n\n'
+	   text = text..'Rank: Owner \n\n'
 	  elseif is_momod2(result.peer_id, extra.chat2) then
-	    text = text..'مقام : مدیر \n\n'
+	    text = text..'Rank: Moderator \n\n'
       else
-	    text = text..'مقام : کاربر \n\n'
+	    text = text..'Rank: User \n\n'
 	 end
    else
-   text = text..'مقام : '..value..'\n\n'
+   text = text..'Rank: '..value..'\n\n'
   end
   local uhash = 'user:'..result.peer_id
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.peer_id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'تعداد پیام های فرستاده : : '..user_info_msgs..'\n\n'
+  text = text..'User msgs: : '..user_info_msgs..'\n\n'
   text = text
   send_msg(extra.receiver, text, ok_cb,  true)
   else
@@ -60,31 +60,31 @@ local function action_by_id(extra, success, result)  -- /info <ID> function
    else
    Username = '----'
  end
-   local text = 'نام کامل : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
-               ..'یوزرنیم: '..Username..'\n'
-               ..'ایدی : '..result.peer_id..'\n\n'
+   local text = 'Full name: '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
+               ..'Username: '..Username..'\n'
+               ..'Id: '..result.peer_id..'\n\n'
   local hash = 'rank:variables'
   local value = redis:hget(hash, result.peer_id)
   if not value then
 	 if result.peer_id == tonumber(Arian) then
-	   text = text..'مقام : BOT Creator \n\n'
+	   text = text..'Rank: Sudo \n\n'
 	  elseif is_admin2(result.peer_id) then
-	   text = text..'مقام : ادمین \n\n'
+	   text = text..'Rank: Admin \n\n'
 	  elseif is_owner2(result.peer_id, extra.chat2) then
-	   text = text..'مقام : مدیر گروه \n\n'
+	   text = text..'Rank: Owner \n\n'
 	  elseif is_momod2(result.peer_id, extra.chat2) then
-	   text = text..'مقام : مدیر \n\n'
+	   text = text..'Rank: Moderator \n\n'
 	  else
-	   text = text..'مقام : کاربر \n\n'
+	   text = text..'Rank: User \n\n'
 	  end
    else
-    text = text..'مقام : '..value..'\n\n'
+    text = text..'Rank: '..value..'\n\n'
   end
   local uhash = 'user:'..result.peer_id
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.peer_id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'تعداد پیام های کاربر : '..user_info_msgs..'\n\n'
+  text = text..'User msgs: '..user_info_msgs..'\n\n'
   text = text
   send_msg(extra.receiver, text, ok_cb,  true)
   else
@@ -177,48 +177,44 @@ elseif string.sub(result.from.phone, 0,1) == '1' then
 				number = "-----"
 			end
 
-  local text = 'نام کامل : '..(result.from.first_name or '')..' '..(result.from.last_name or '')..'\n'
-               ..'یوزرنیم : '..Username..'\n\n'
-local text = text..'شماره تلفن : '..number..'\n\n'
-local text = text..'نوع متن : '..msg_type..'\n\n'
-               ..'ایدی : '..result.from.peer_id..'\n\n'
+  local text = 'Full name: '..(result.from.first_name or '')..' '..(result.from.last_name or '')..'\n'
+               ..'Username: '..Username..'\n\n'
+local text = text..'Phone number: '..number..'\n\n'
+local text = text..'Msg: '..msg_type..'\n\n'
+               ..'Id: '..result.from.peer_id..'\n\n'
 	local hash = 'rank:variables'
 		local value = redis:hget(hash, result.from.peer_id)
 		 if not value then
 		    if result.from.peer_id == tonumber(Arian) then
-		       text = text..'مقام : BOT Creator \n\n'
-			   elseif result.peer_id == tonumber(Sosha) then
-	           text = text..'مقام : مدیر ارشد ربات (Full Access Admin) \n\n'
-	          --elseif result.peer_id == tonumber(Sosha2) then
-	          --text = text..'Rank : مدیر ارشد ربات (Full Access Admin) \n\n'
+		       text = text..'Rank: Sudo \n\n'
 		     elseif is_admin2(result.from.peer_id) then
-		       text = text..'مقام : ادمین \n\n'
+		       text = text..'Rank: Admin \n\n'
 		     elseif is_owner2(result.from.peer_id, result.to.id) then
-		       text = text..'مقام : لیدر گروه \n\n'
+		       text = text..'Rank: Owner \n\n'
 		     elseif is_momod2(result.from.peer_id, result.to.id) then
-		       text = text..'مقام : مدیر \n\n'
+		       text = text..'Rank: Moderator \n\n'
 		 else
-		       text = text..'مقام : کاربر \n\n'
+		       text = text..'Rank: User \n\n'
 			end
 		  else
-		   text = text..'مقام : '..value..'\n\n'
+		   text = text..'Rank: '..value..'\n\n'
 		 end
          local user_info = {} 
   local uhash = 'user:'..result.from.peer_id
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.from.peer_id..':'..result.to.peer_id
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'⭐تعداد پیام های کاربر : '..user_info_msgs..'\n\n'
+  text = text..'User msgs: '..user_info_msgs..'\n\n'
 local uhash = 'user:'..result.from.peer_id
  	 local user = redis:hgetall(uhash)
   	 local banhash = 'addedbanuser:'..result.to.peer_id..':'..result.from.peer_id
 	 user_info_addedbanuser = tonumber(redis:get(banhash) or 0)
-text = text..'⭐تعداد خطا در اضافه کردن کاربر بن شده: '..user_info_addedbanuser..'\n\n'
+text = text..'Add ban user: '..user_info_addedbanuser..'\n\n'
 local uhash = 'user:'..result.from.peer_id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'gban:spam'..result.from.peer_id
 	 user_info_gbanspam = tonumber(redis:get(um_hash) or 0)
-	 text = text..'⭐تعداد دفعات اسپم در گروه ها: '..user_info_gbanspam..'\n-------------------------------------------------\nℹModerators info\n\n'
+	 text = text..'Spam in group: '..user_info_gbanspam..'\n-------------------------------------------------\nℹModerators info\n\n'
 local uhash = 'user:'..result.from.peer_id
 local user = redis:hgetall(uhash)
   	 local um_hash = 'kicked:'..result.from.peer_id..':'..result.to.peer_id
@@ -249,7 +245,7 @@ local function run(msg, matches)
   local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
   redis:incr(hash)
   if not is_sudo(msg) then
-    return "این دستور فقط برای ادمین های اصلی ربات فعال می باشد"
+    return "Sudo only!"
   end
   local receiver = get_receiver(msg)
   local Reply = msg.reply_id
@@ -340,17 +336,17 @@ elseif string.sub(msg.from.phone, 0,1) == '1' then
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'msgs:'..msg.from.id..':'..msg.to.id
 	 user_info_msgs = tonumber(redis:get(um_hash) or 0)
-	 text = text..'⭐تعداد پیام های کاربر: '..user_info_msgs..'\n'
+	 text = text..'User msgs: '..user_info_msgs..'\n'
 local uhash = 'user:'..msg.from.id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'addedbanuser:'..msg.to.id..':'..msg.from.id
 	 user_info_addedbanuser = tonumber(redis:get(um_hash) or 0)
-text = text..'⭐تعداد خطا در اضافه کردن کاربر بن شده : '..user_info_addedbanuser..'\n'
+text = text..'Add ban user: '..user_info_addedbanuser..'\n'
 local uhash = 'user:'..msg.from.id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'gban:spam'..msg.from.id
 	 user_info_gbanspam = tonumber(redis:get(um_hash) or 0)
-	 text = text..'⭐تعداد دفعات اسپم در گروه ها: '..user_info_gbanspam..'\n-------------------------------------------------\nℹModerators info\n\n'
+	 text = text..'Spam in group: '..user_info_gbanspam..'\n-------------------------------------------------\nℹModerators info\n\n'
 local uhash = 'user:'..msg.from.id
 local user = redis:hgetall(uhash)
   	 local um_hash = 'kicked:'..msg.from.id..':'..msg.to.id
