@@ -215,7 +215,7 @@ local uhash = 'user:'..result.from.peer_id
   	 local um_hash = 'gban:spam'..result.from.peer_id
 	 user_info_gbanspam = tonumber(redis:get(um_hash) or 0)
 	 text = text..'Spam in group: '..user_info_gbanspam..'
-
+end
 local function action_by_reply2(extra, success, result)
 local value = extra.value
 setrank(result, result.from.peer_id, value, extra.receiver)
@@ -322,6 +322,7 @@ local uhash = 'user:'..msg.from.id
   	 local um_hash = 'addedbanuser:'..msg.to.id..':'..msg.from.id
 	 user_info_addedbanuser = tonumber(redis:get(um_hash) or 0)
 text = text..'Add ban users: '..user_info_addedbanuser..'\n'
+end
 local uhash = 'user:'..msg.from.id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'gban:spam'..msg.from.id
