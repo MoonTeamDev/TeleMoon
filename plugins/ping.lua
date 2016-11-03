@@ -38,7 +38,6 @@ local function run(msg, matches)
   / \
  /   \</code>"
         end
-    end
 return {
 	patterns = {
 "^[!#/]ping$",
