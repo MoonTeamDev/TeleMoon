@@ -40,9 +40,9 @@ local function run(msg, matches)
         end
 return {
 	patterns = {
-"^[!#/]ping$",
-"^[!#/]bot$",
-"^[!#/]tik$",
+"^ping",
+"^bot",
+"^tik",
 },
 run = run,
 }
