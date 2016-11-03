@@ -27,8 +27,6 @@ return {
   usage = "",
   patterns = {
     "^[!/#](bot)$",
-    "^[!/#](ping)$",
-    "^[!/#](tik)$",
   },
   run = run
 }
