@@ -1,33 +1,49 @@
-do
-
-function run(msg, matches)
-if msg.from.id == 90285047 then
-  return "<i>I'm online</i> <a href="telegram.me/makan">Dadi 😍😘</a>"
-elseif is_sudo(msg) then
- return "<i>I am online</i> <b>fuck you</b>😐"
-elseif is_admin1(msg) then
- return "<b>fuck you</b>😐\n<i>I am online</i>͡° ͜ʖ ͡°"
-elseif is_owner(msg) then
-  return "<b>I'm online </b>😉"
-elseif is_momod(msg) then
- return "<b>I'm online bitch :|️</b>"
-else 
-return "<b>I'm here mother fucker  
-       /🖕
+local function run(msg, matches)
+    if msg.text == "ping" then
+      if is_sudo(msg) then
+        return "<i>Pong!</i>"
+      else
+        return "<b>I'm here mother fucker  
+        /🖕
  (°·°)/
  / | /
 /  | 
  \ |8=====D
   / \
  /   \</b>"
-end
-end
+      end
+    elseif msg.text == "bot" then
+      if is_sudo(msg) then
+        return "What?😗"
+      else
+        return "<i>Eat it mother fucker  
+        /🖕
+ (°·°)/
+ / | /
+/  | 
+ \ |8=====D
+  / \
+ /   \</i>"
+      end
+    elseif msg.text == "tik" then
+      if is_sudo(msg) then
+        return "<code>tak</code>"
+      else
+        return "<code>come here bitch  
+        /🖕
+ (°·°)/
+ / | /
+/  | 
+ \ |8=====D
+  / \
+ /   \</code>"
+        end
+    end
 return {
-  description = "", 
-  usage = "",
-  patterns = {
-    "^[!/#](bot)$",
-  },
-  run = run
+	patterns = {
+"^[!#/]([Pp][Ii][Nn][Gg])",
+"^[!#/]([Bb][Oo][Tt]",
+"^[!#/]([Tt][Ii][Kk]",
+},
+run = run,
 }
-end
