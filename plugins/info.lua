@@ -1,9 +1,9 @@
 do
-local makan = 90285047
+local Arian = 90285047 --put your id here(BOT OWNER ID)
 
 local function setrank(msg, name, value) -- setrank function
   local hash = nil
-  if msg.to.type == 'chat' then
+   if msg.to.type == 'chat' or msg.to.type == 'channel'  then
     hash = 'rank:'..msg.to.id..':variables'
   end
   if hash then
@@ -20,14 +20,15 @@ local function res_user_callback(extra, success, result) -- /info <username> fun
    else
    Username = '----'
   end
-    local text = 'Full name : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
-               ..'User name: '..Username..'\n'
-               ..'ID : '..result.id..'\n\n'
-	local hash = 'rank:'..extra.chat2..':variables'
+    local text = '➰Full name : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
+               ..'➰User name: '..Username..'\n'
+               ..'➰ID : '..result.id..'\n\n'
+               .."➰phone number : +"..(msg.from.phone or '----')..'\n'
+	local hash = '➰rank:'..extra.chat2..':variables'
 	local value = redis:hget(hash, result.id)
     if not value then
-	 if result.id == tonumber(makan) then
-	   text = text..'Rank : Executive Admin \n\n'
+	 if result.id == tonumber(Arian) then
+	   text = text..'Rank : ادمین کل ربات \n\n'
 	  elseif is_admin2(result.id) then
 	   text = text..'Rank : Admin \n\n'
 	  elseif is_owner2(result.id, extra.chat2) then
@@ -45,7 +46,7 @@ local function res_user_callback(extra, success, result) -- /info <username> fun
   local um_hash = 'msgs:'..result.id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
   text = text..'Total messages : '..user_info_msgs..'\n\n'
-  text = text..'@MoonsTeam'
+  text = text..'@TgDeveTeam'
   send_msg(extra.receiver, text, ok_cb,  true)
   else
 	send_msg(extra.receiver, ' Username not found.', ok_cb, false)
@@ -59,14 +60,15 @@ local function action_by_id(extra, success, result)  -- /info <ID> function
    else
    Username = '----'
  end
-   local text = 'Full name : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
-               ..'Username: '..Username..'\n'
-               ..'ID : '..result.id..'\n\n'
-  local hash = 'rank:'..extra.chat2..':variables'
+   local text = '➰Full name : '..(result.first_name or '')..' '..(result.last_name or '')..'\n'
+               ..'➰Username: '..Username..'\n'
+               ..'➰ID : '..result.id..'\n\n'
+               .."➰phone number : +"..(msg.from.phone or '----')..'\n'
+  local hash = '➰rank:'..extra.chat2..':variables'
   local value = redis:hget(hash, result.id)
   if not value then
-	 if result.id == tonumber(makan) then
-	   text = text..'Rank : Executive Admin \n\n'
+	 if result.id == tonumber(Arian) then
+	   text = text..'Rank : ادمین کل ربات \n\n'
 	  elseif is_admin2(result.id) then
 	   text = text..'Rank : Admin \n\n'
 	  elseif is_owner2(result.id, extra.chat2) then
@@ -84,7 +86,7 @@ local function action_by_id(extra, success, result)  -- /info <ID> function
   local um_hash = 'msgs:'..result.id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
   text = text..'Total messages : '..user_info_msgs..'\n\n'
-  text = text..'@MoonsTeam'
+  text = text..'@TgDeveTeam'
   send_msg(extra.receiver, text, ok_cb,  true)
   else
   send_msg(extra.receiver, 'id not found.\nuse : /info @username', ok_cb, false)
@@ -97,14 +99,15 @@ local function action_by_reply(extra, success, result)-- (reply) /info  function
 		   else
 		   Username = '----'
 		 end
-  local text = 'Full name : '..(result.from.first_name or '')..' '..(result.from.last_name or '')..'\n'
-               ..'Username : '..Username..'\n'
-               ..'ID : '..result.from.id..'\n\n'
-	local hash = 'rank:'..result.to.id..':variables'
+  local text = '➰Full name : '..(result.from.first_name or '')..' '..(result.from.last_name or '')..'\n'
+               ..'➰Username : '..Username..'\n'
+               ..'➰ID : '..result.from.id..'\n\n'
+	           .."➰phone number : +"..(msg.from.phone or '----')..'\n'
+	local hash = '➰rank:'..result.to.id..':variables'
 		local value = redis:hget(hash, result.from.id)
 		 if not value then
-		    if result.from.id == tonumber(makan) then
-		       text = text..'Rank : Executive Admin \n\n'
+		    if result.from.id == tonumber(Arian) then
+		       text = text..'Rank :ادمین کل ربات \n\n'
 		     elseif is_admin2(result.from.id) then
 		       text = text..'Rank : Admin \n\n'
 		     elseif is_owner2(result.from.id, result.to.id) then
@@ -123,7 +126,7 @@ local function action_by_reply(extra, success, result)-- (reply) /info  function
   local um_hash = 'msgs:'..result.from.id..':'..result.to.id
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
   text = text..'Total messages : '..user_info_msgs..'\n\n'
-  text = text..'@MoonsTeam'
+  text = text..'@TgDeveTeam'
   send_msg(extra.receiver, text, ok_cb, true)
 end
 
@@ -137,7 +140,7 @@ local function run(msg, matches)
   local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
   redis:incr(hash)
   if not is_sudo(msg) then
-    return "Only for Sudo"
+    return "کونده مگه تو بابامی؟"
   end
   local receiver = get_receiver(msg)
   local Reply = msg.reply_id
@@ -163,22 +166,23 @@ local function run(msg, matches)
    else
    Username = '----'
    end
-   local text = 'First name : '..(msg.from.first_name or '----')..'\n'
-   local text = text..'Last name : '..(msg.from.last_name or '----')..'\n'	
-   local text = text..'Username : '..Username..'\n'
-   local text = text..'ID : '..msg.from.id..'\n\n'
+   local text = '➰First name : '..(msg.from.first_name or '----')..'\n'
+   local text = text..'➰Last name : '..(msg.from.last_name or '----')..'\n'	
+   local text = text..'➰phone number : +'..(msg.from.phone or '----')..'\n'
+   local text = text..'➰Username : '..Username..'\n'
+   local text = text..'➰ID : '..msg.from.id..'\n\n'
    local hash = 'rank:'..msg.to.id..':variables'
 	if hash then
 	  local value = redis:hget(hash, msg.from.id)
 	  if not value then
-		if msg.from.id == tonumber(makan) then
-		 text = text..'Rank : Executive Admin \n\n'
+		if msg.from.id == tonumber(Arian) then
+		 text = text..'Rank : ادمین کل ربات \n\n'
 		elseif is_sudo(msg) then
 		 text = text..'Rank : Admin \n\n'
 		elseif is_owner(msg) then
 		 text = text..'Rank : Owner \n\n'
 		elseif is_momod(msg) then
-		 text = text..'Rank : Moderator \n\n'
+		 text = text..'Rank :Moderator \n\n'
 		else
 		 text = text..'Rank : Member \n\n'
 		end
@@ -195,11 +199,11 @@ local function run(msg, matches)
 	 text = text..'Group name : '..msg.to.title..'\n'
      text = text..'Group ID : '..msg.to.id
     end
-	text = text..'\n\n@MoonsTeam'
+	text = text..'\n\n@TgDeveTeam'
     return send_msg(receiver, text, ok_cb, true)
     end
   end
-  if matches[1]:lower() == 'info' and matches[2] then
+  if matches[1]:lower() == 'info' and matches[2]  then
    local user = matches[2]
    local chat2 = msg.to.id
    local receiver = get_receiver(msg)
@@ -223,10 +227,12 @@ return {
 	'(Reply)!setrank <rank>: change members rank.',
   },
   patterns = {
-	"^[!/#]([Ii][Nn][Ff][Oo])$",
-	"^[!/#]([Ii][Nn][Ff][Oo]) (.*)$",
-	"^[!/#]([Ss][Ee][Tt][Rr][Aa][Nn][Kk]) (%d+) (.*)$",
-	"^[!/#]([Ss][Ee][Tt][Rr][Aa][Nn][Kk]) (.*)$",
+	"^([Ii][Nn][Ff][Oo])$",
+	"^([Ii][Nn][Ff][Oo]) (.*)$",
+	"^[#!/](info)$",
+	"^[#!/](info)(.*)$",
+	"^([Ss][Ee][Tt][Rr][Aa][Nn][Kk]) (%d+) (.*)$",
+	"^([Ss][Ee][Tt][Rr][Aa][Nn][Kk]) (.*)$"
   },
   run = run
 }
