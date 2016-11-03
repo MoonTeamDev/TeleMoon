@@ -310,30 +310,30 @@ elseif string.sub(msg.from.phone, 0,1) == '1' then
 				number = "-----"
 			end
 --------------------
-   local text = 'نام: '..(msg.from.first_name or '----')..'\n'
-   local text = text..'فامیل : '..(msg.from.last_name or '----')..'\n'	
-   local text = text..'یوزرنیم : '..Username..'\n'
-   local text = text..'ایدی : '..msg.from.id..'\n\n'
-	  local text = text..'شماره تلفن : '..number..'\n'
-	local text = text..'زمان : '..jdat.ENtime..'\n'
-	local text = text..'تاریخ  : '..jdat.ENdate..'\n\n'
+   local text = 'First name: '..(msg.from.first_name or '----')..'\n'
+   local text = text..'Last name: '..(msg.from.last_name or '----')..'\n'	
+   local text = text..'Username: '..Username..'\n'
+   local text = text..'Id: '..msg.from.id..'\n\n'
+	  local text = text..'Phone number: '..number..'\n'
+	local text = text..'Time: '..jdat.ENtime..'\n'
+	local text = text..'Date: '..jdat.ENdate..'\n\n'
    local hash = 'rank:variables'
 	if hash then
 	  local value = redis:hget(hash, msg.from.id)
 	  if not value then
 		if msg.from.id == tonumber(Arian) then
-		 text = text..'مقام : BOT Creator \n\n'
+		 text = text..'Rank: Sudo \n\n'
 		elseif is_admin1(msg) then
-		 text = text..'مقام : ادمین \n\n'
+		 text = text..'Rank: Admin \n\n'
 		elseif is_owner(msg) then
-		 text = text..'مقام : مدیر گروه \n\n'
+		 text = text..'Rank: Owner \n\n'
 		elseif is_momod(msg) then
-		 text = text..'مقام : مدیر \n\n'
+		 text = text..'Rank: Moderator \n\n'
 		else
-		 text = text..'مقام : کاربر \n\n'
+		 text = text..'Rank: User \n\n'
 		end
 	  else
-	   text = text..'مقام : '..value..'\n'
+	   text = text..'Rank: '..value..'\n'
 	  end
 	end
 	 local uhash = 'user:'..msg.from.id
@@ -367,8 +367,8 @@ local user = redis:hgetall(uhash)
 	 user_info_banned = tonumber(redis:get(um_hash) or 0)
 text = text..'🔘تعداد افراد بن کرده  : '..user_info_banned..'\n\n'
     if msg.to.type == 'chat' or msg.to.type == 'channel' then
-	 text = text..'نام گروه : '..msg.to.title..'\n'
-     text = text..'ایدی گروه : '..msg.to.id..''
+	 text = text..'Group name: '..msg.to.title..'\n'
+     text = text..'Group id: '..msg.to.id..''
     end
 	text = text
     return reply_msg(msg.id, text, ok_cb, false)
