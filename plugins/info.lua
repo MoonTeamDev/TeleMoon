@@ -45,7 +45,7 @@ local function res_user_callback(extra, success, result) -- /info <username> fun
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.peer_id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'Msg send: '..user_info_msgs..'\n\n'
+  text = text..'User msgs: '..user_info_msgs..'\n\n'
   text = text
   send_msg(extra.receiver, text, ok_cb,  true)
   else
@@ -84,7 +84,7 @@ local function action_by_id(extra, success, result)  -- /info <ID> function
   local user = redis:hgetall(uhash)
   local um_hash = 'msgs:'..result.peer_id..':'..extra.chat2
   user_info_msgs = tonumber(redis:get(um_hash) or 0)
-  text = text..'Msg send: '..user_info_msgs..'\n\n'
+  text = text..'User Msgs: '..user_info_msgs..'\n\n'
   text = text
   send_msg(extra.receiver, text, ok_cb,  true)
   else
@@ -214,26 +214,7 @@ local uhash = 'user:'..result.from.peer_id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'gban:spam'..result.from.peer_id
 	 user_info_gbanspam = tonumber(redis:get(um_hash) or 0)
-	 text = text..'Spam in group: '..user_info_gbanspam..'\n-------------------------------------------------\nℹModerators info\n\n'
-local uhash = 'user:'..result.from.peer_id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'kicked:'..result.from.peer_id..':'..result.to.peer_id
-	 user_info_kicked = tonumber(redis:get(um_hash) or 0)
-text = text..'🔘تعداد افراد اخراج کرده  : '..user_info_kicked..'\n'
-local uhash = 'user:'..result.from.peer_id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'muted:'..result.from.peer_id..':'..result.to.peer_id
-	 user_info_muted = tonumber(redis:get(um_hash) or 0)
-text = text..'🔘تعداد افراد سایلنت کرده  : '..user_info_muted..'\n'
-local uhash = 'user:'..result.from.peer_id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'banned:'..result.from.peer_id..':'..result.to.peer_id
-	 user_info_banned = tonumber(redis:get(um_hash) or 0)
-text = text..'🔘تعداد افراد بن کرده  : '..user_info_banned..'\n\n'
-
-  text = text
-  send_msg(extra.receiver, text, ok_cb, true)
-end
+	 text = text..'Spam in group: '..user_info_gbanspam..'
 
 local function action_by_reply2(extra, success, result)
 local value = extra.value
@@ -340,35 +321,12 @@ local uhash = 'user:'..msg.from.id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'addedbanuser:'..msg.to.id..':'..msg.from.id
 	 user_info_addedbanuser = tonumber(redis:get(um_hash) or 0)
-text = text..'Add ban user: '..user_info_addedbanuser..'\n'
+text = text..'Add ban users: '..user_info_addedbanuser..'\n'
 local uhash = 'user:'..msg.from.id
  	 local user = redis:hgetall(uhash)
   	 local um_hash = 'gban:spam'..msg.from.id
 	 user_info_gbanspam = tonumber(redis:get(um_hash) or 0)
-	 text = text..'Spam in group: '..user_info_gbanspam..'\n-------------------------------------------------\nℹModerators info\n\n'
-local uhash = 'user:'..msg.from.id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'kicked:'..msg.from.id..':'..msg.to.id
-	 user_info_kicked = tonumber(redis:get(um_hash) or 0)
-text = text..'🔘تعداد افراد اخراج کرده  : '..user_info_kicked..'\n'
-local uhash = 'user:'..msg.from.id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'muted:'..msg.from.id..':'..msg.to.id
-	 user_info_muted = tonumber(redis:get(um_hash) or 0)
-text = text..'🔘تعداد افراد سایلنت کرده  : '..user_info_muted..'\n'
-local uhash = 'user:'..msg.from.id
-local user = redis:hgetall(uhash)
-  	 local um_hash = 'banned:'..msg.from.id..':'..msg.to.id
-	 user_info_banned = tonumber(redis:get(um_hash) or 0)
-text = text..'🔘تعداد افراد بن کرده  : '..user_info_banned..'\n\n'
-    if msg.to.type == 'chat' or msg.to.type == 'channel' then
-	 text = text..'Group name: '..msg.to.title..'\n'
-     text = text..'Group Id: '..msg.to.id..''
-    end
-	text = text
-    return reply_msg(msg.id, text, ok_cb, false)
-    end
-  end
+	 text = text..'Spam in group: '..user_info_gbanspam..'
   if matches[1]:lower() == 'info' and matches[2] then
    local user = matches[2]
    local chat2 = msg.to.id
