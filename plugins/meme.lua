@@ -20,14 +20,14 @@ end
 return {
   usage = ' ',
   patterns = {
-    "^([Mm]eme) ([Bb]ob) (.*)$",
-	"^([Mm]eme) ([Bb]ob) (.*) + (.*)$",
-	"^([Mm]eme) ([Cc]at) (.*)$",
-	"^([Mm]eme) ([Cc]at) (.*) + (.*)$",
-	"^([Mm]eme) (test) (.*)$",
-	"^([Mm]eme) (test) (.*) + (.*)$",
+    "[/!#]^([Mm]eme) ([Bb]ob) (.*)$",
+	"^[/!#]([Mm]eme) ([Bb]ob) (.*) + (.*)$",
+	"^[/!#]([Mm]eme) ([Cc]at) (.*)$",
+	"^[/!#]([Mm]eme) ([Cc]at) (.*) + (.*)$",
+	"^[/!#]([Mm]eme) (test) (.*)$",
+	"^[/!#]([Mm]eme) (test) (.*) + (.*)$",
 	
   },
   run = run
 }
---by @ubuntu_14
+--by @MoonsTeam
