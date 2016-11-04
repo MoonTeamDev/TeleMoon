@@ -15,7 +15,7 @@ end
 return {
    
      patterns = {
-   "^[/!#](gif)$",
+   "^[/!#](video)$",
 },
 run = run,
 }
