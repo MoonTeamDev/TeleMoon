@@ -239,9 +239,6 @@ local function run(msg, matches)
    else
    Username = '----'
    end
-	 local url , res = http.request('http://api.gpmod.ir/time/')
-if res ~= 200 then return "No connection" end
-local jdat = json:decode(url)
 -----------
 if msg.from.phone then
 				numberorg = string.sub(msg.from.phone, 3)
@@ -279,8 +276,6 @@ elseif string.sub(msg.from.phone, 0,1) == '1' then
    local text = text..'Username: '..Username..'\n'
    local text = text..'Id: '..msg.from.id..'\n\n'
 	  local text = text..'Phone number: '..number..'\n'
-	local text = text..'Time: '..jdat.ENtime..'\n'
-	local text = text..'Date: '..jdat.ENdate..'\n\n'
    local hash = 'rank:variables'
 	if hash then
 	  local value = redis:hget(hash, msg.from.id)
