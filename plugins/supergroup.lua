@@ -387,6 +387,34 @@ local function unlock_group_fosh(msg, data, target)
   end
 end
 
+local function lock_group_inline(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_inline_lock = data[tostring(target)]['settings']['inline']
+  if group_inline_lock == 'yes' then
+    return 'Inline is already locked'
+  else
+    data[tostring(target)]['settings']['inline'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'Inline has been locked'
+  end
+end
+
+local function unlock_group_inline(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_inline_lock = data[tostring(target)]['settings']['inline']
+  if group_inline_lock == 'no' then
+    return 'Inline is not locked'
+  else
+    data[tostring(target)]['settings']['inline'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'Inline has been unlocked'
+  end
+end
+
 local function lock_group_join(msg, data, target)
   if not is_momod(msg) then
     return
@@ -945,6 +973,11 @@ function show_supergroup_settingsmod(msg, target)
 		end
 	end
 	  if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['inline'] then
+			data[tostring(target)]['settings']['inline'] = 'no'
+		end
+	end
+                 if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['username'] then
 			data[tostring(target)]['settings']['username'] = 'no'
 		end
@@ -972,7 +1005,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "SuperGroup settings️\n➖➖➖➖➖➖➖➖\nLock links : "..settings.lock_link.."\nLock contacts: "..settings.lock_contacts.."\nLock flood: "..settings.flood.."\nFlood sensitivity : "..NUM_MSG_MAX.."\nLock spam: "..settings.lock_spam.."\nLock Arabic: "..settings.lock_arabic.."\nLock Member: "..settings.lock_member.."\nLock RTL: "..settings.lock_rtl.."\nLock Tgservice: "..settings.lock_tgservice.."\nLock sticker: "..settings.lock_sticker.."\nLock emoji: "..settings.emoji.."\nLock fwd(forward): "..settings.fwd.."\nLock reply: "..settings.reply.."\nLock join: "..settings.join.."\nLock username(@): "..settings.username.."\nLock media: "..settings.media.."\nLock fosh: "..settings.fosh.."\nLock leave: "..settings.leave.."\nLock bots: "..bots_protection.."\nLock operator: "..settings.operator.."️\nGroup type: "..gp_type.."\nPublic: "..settings.public.."\nStrict settings: "..settings.strict.." )\n➖➖➖➖➖➖➖➖\nTeleMoon V5\n️@MoonsTeam"
+  local text = "SuperGroup settings️\n➖➖➖➖➖➖➖➖\nLock links : "..settings.lock_link.."\nLock contacts: "..settings.lock_contacts.."\nLock flood: "..settings.flood.."\nFlood sensitivity : "..NUM_MSG_MAX.."\nLock spam: "..settings.lock_spam.."\nLock Arabic: "..settings.lock_arabic.."\nLock Member: "..settings.lock_member.."\nLock RTL: "..settings.lock_rtl.."\nLock Tgservice: "..settings.lock_tgservice.."\nLock sticker: "..settings.lock_sticker.."\nLock emoji: "..settings.emoji.."\nLock fwd(forward): "..settings.fwd.."\nLock reply: "..settings.reply.."\nLock join: "..settings.join.."\nLock username(@): "..settings.username.."\nLock media: "..settings.media.."\nLock fosh: "..settings.fosh.."\nLock inline: "..settings.inline.."\nLock leave: "..settings.leave.."\nLock bots: "..bots_protection.."\nLock operator: "..settings.operator.."️\nGroup type: "..gp_type.."\nPublic: "..settings.public.."\nStrict settings: "..settings.strict.." )\n➖➖➖➖➖➖➖➖\nTeleMoon V5\n️@MoonsTeam"
   return text
 end
 
@@ -2129,6 +2162,10 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked fosh")
 				return lock_group_fosh(msg, data, target)
 			end
+                                            if matches[2] == 'inline' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked inline")
+				return lock_group_inline(msg, data, target)
+			end
 			if matches[2] == 'media' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked media")
 				return lock_group_media(msg, data, target)
@@ -2220,6 +2257,10 @@ local function run(msg, matches)
 			if matches[2] == 'fosh' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked fosh")
 				return unlock_group_fosh(msg, data, target)
+			end
+                                           if matches[2] == 'inline' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked inline")
+				return unlock_group_inline(msg, data, target)
 			end
 			if matches[2] == 'media' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked media")
