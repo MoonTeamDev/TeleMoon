@@ -6,7 +6,7 @@ local function admin_list(msg)
         data[tostring(admins)] = {}
         save_data(_config.moderation.data, data)
         end
-        local message = 'List Admins:\n'
+        local message = 'List Admins💯:\n'
         for k,v in pairs(data[tostring(admins)]) do
                 message = message .. '>🏅 @' .. v ..'\n'
         end
@@ -28,7 +28,7 @@ local space = '____________________________'
 if not group_link then
 group_link = "Unset"
 end
-return "#Cruel_Bot\n\nUptime⏱:\n"..up.."\n"..space.."\nDeveloper: "..owner.."\n"..admins.."\n"..space.."\n\nOur team official channel📢: "..channel.."\n\nSudo's bot for reports: "..privator.."\n\nSupport link:\n"..group_link
+return "#Cruel_Bot\n\nUptime⏱:\n"..up.."\n"..space.."\n🔹Developer: "..owner.."\n"..admins.."\n"..space.."\n\n🔸Our team official channel📢: "..channel.."\n\n🔹Sudo's bot for reports: "..privator.."\n\n🔹Support link:\n"..group_link
 end
 return {
 patterns = {
