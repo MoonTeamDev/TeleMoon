@@ -15,6 +15,8 @@ end
  return {
   patterns = {
 "^[/!#](png),
+"%[(document)%]", 
+   "%[(photo)%]", 
  }, 
 run = run, 
 } 
