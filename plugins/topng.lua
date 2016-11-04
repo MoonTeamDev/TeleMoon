@@ -14,7 +14,7 @@ local function topng(msg, success, result)
 end 
  return {
   patterns = {
-"^[/!#](png)
+"^[/!#](png),
  }, 
 run = run, 
 } 
