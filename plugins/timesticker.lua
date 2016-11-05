@@ -19,8 +19,7 @@ return {
   }, 
   patterns = { 
    "^[Tt]ime$", 
-   "^[!#/][Tt]ime$",
-   "ساعت",   
+   "^[!#/][Tt]ime$",  
   }, 
   run = run 
 } 
