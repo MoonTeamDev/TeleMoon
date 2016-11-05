@@ -32,9 +32,9 @@ end
 return {
   patterns = {
  "^[!#/](audio)$",
- "%[(audio)%]",
- },
-run = run,
+ "%[(audio)%]"
+ }
+run = run
 }
  
 run = run
