@@ -31,7 +31,7 @@ end
 local function run(msg, matches)
     local receiver = get_receiver(msg)
  if not is_owner(msg) then 
-  return "Owner only!"
+  return "شما صاحب گروه نیستید!"
  end
  if matches[1] then
  if msg.to.type == 'chat' then
@@ -50,7 +50,7 @@ return {
     "/tagall [msg]."
   },
   patterns = {
-    "^[!/#]tagall +(.+)$"
+    "^[!/]tagall +(.+)$"
   },
   run = run
 }
