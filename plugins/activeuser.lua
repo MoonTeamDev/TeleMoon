@@ -289,7 +289,8 @@ end
 end
 return {
   patterns = {
-    "^[!/#]msguser$",
+    "^[!/#]active$",
+	"^active$",
   }, 
   pre_process = pre_process,
   cron = cron,
