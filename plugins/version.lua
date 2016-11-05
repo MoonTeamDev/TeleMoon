@@ -28,7 +28,7 @@ local space = '____________________________'
 if not group_link then
 group_link = "Unset"
 end
-return "#Cruel_Bot\n\nUptime⏱:\n"..up.."\n"..space.."\n🔹Developer: "..owner.."\n"..admins.."\n"..space.."\n\n🔸Our team official channel📢: "..channel.."\n\n🔹Sudo's bot for reports: "..privator.."\n\n🔹Support link:\n"..group_link
+return "#TeleMoon\n\nUptime⏱:\n"..up.."\n"..space.."\n🔹Developer: "..owner.."\n"..admins.."\n"..space.."\n\n🔸Our team official channel📢: "..channel.."\n\n🔹Sudo's bot for reports: "..privator.."\n\n🔹Support link:\n"..group_link
 end
 return {
 patterns = {
