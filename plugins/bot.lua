@@ -8,7 +8,7 @@ return datebase[math.random(#datebase)]
 end
 return {
   patterns = {
-    "^[!#/]([Bb][Oo][Tt])",
+    "^[!#/]([Bb][Oo][Tt])$",
   },
   run = run
 }
