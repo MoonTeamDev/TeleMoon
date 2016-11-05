@@ -1,15 +1,15 @@
-local database = 'http://vip.opload.ir/vipdl/95/1/amirhmz/'
+local database = 'http://umbrella.shayan-soft.ir/txt/'
 local function run(msg)
-	local res = http.request(database.."danestani.db")
-	local danestani = res:split(",") 
-	return danestani[math.random(#danestani)]
+  local res = http.request(database.."danestani.db")
+  if string.match(res, '@MoonsTeam') then res = string.gsub(res, '@MoonsTeam', "")
+ end
+  local danestani = res:split(",")
+  return danestani[math.random(#danestani)]
 end
+
 return {
-	description = "500 Persian danestani",
-	usage = "!danestani : send random danestani",
-	patterns = {
-		"^[/#!][Dd]anestani$",
-		"^(danestani)$"
-		},
-	run = run
+  description = "500 Persian danestani",
+  usage = "danestani : send random danestani",
+  patterns = {"^[/#!][Dd]anestani$"},
+  run = run
 }
