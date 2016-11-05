@@ -1,5 +1,5 @@
 local function run(msg, matches)
-	if matches[1]:lower() == 'varzesh' then
+	if matches[1]:lower() == 'sport' then
     local url = 'http://www.top90.ir/iran/persian-gulf-league'
   local res,code = http.request(url)
 local text = '🔆فوتبال لیگ برتر ایران🔆\n\n'
@@ -105,7 +105,7 @@ local rrreee = text7:gsub('&ndash;','-')
 end
 return {
    patterns = {
-"^[/#!](varzesh)$",
+"^[/#!](sport)$",
 "^[/#!](tinfo) (%d+)$",
    },
    run = run
