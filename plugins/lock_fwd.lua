@@ -6,7 +6,7 @@ local function pre_process(msg)
     local hash = 'mate:'..msg.to.id
     if redis:get(hash) and msg.fwd_from and not is_sudo(msg) and not is_owner(msg) and not is_momod(msg) and not is_admin1(msg)  then
             delete_msg(msg.id, ok_cb, true)
-            return "done"
+            return ""
         end
     
         return msg
@@ -18,13 +18,13 @@ local function pre_process(msg)
 local function run(msg, matches)
     chat_id =  msg.to.id
     
-    if is_momod(msg) and matches[1] == 'lock' or matches[1] == 'قفل کردن' then
+    if is_momod(msg) and matches[1] == 'lock' then
       
             
                     local hash = 'mate:'..msg.to.id
                     redis:set(hash, true)
                     return ""
-  elseif is_momod(msg) and matches[1] == 'unlock' or matches[1] == 'بازکردن' then
+  elseif is_momod(msg) and matches[1] == 'unlock' then
                     local hash = 'mate:'..msg.to.id
                     redis:del(hash)
                     return ""
@@ -34,10 +34,8 @@ end
 
 return {
     patterns = {
-        '^[/!#](lock) fwd$',
-        '^[/!#](unlock) fwd$',
-        '^[/!#](قفل کردن) فوروارد$',
-        '^[/!#](بازکردن) فوروارد$'
+        '^[#!/](lock) fwd$',
+        '^[#!/](unlock) fwd$'
     },
     run = run,
     pre_process = pre_process
