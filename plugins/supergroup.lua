@@ -2634,7 +2634,7 @@ return {
     "[#!/](mp) (.*)",
 	"[#!/](md) (.*)",
     "^([https?://w]*.?telegram.me/joinchat/%S+)$",
-	"msg.to.peer_id",
+	--"msg.to.peer_id",
 	"%[(document)%]",
 	"%[(photo)%]",
 	"%[(video)%]",
