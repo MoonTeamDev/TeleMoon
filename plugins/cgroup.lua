@@ -56,15 +56,15 @@ end
 
 local function run(msg, matches)
   local wait = 3 — waiting time (in minute) #you can change the value as you want#
-  —[[if is_chat_msg(msg) then
-      —return 'Only works on private message!'
+  [[if is_chat_msg(msg) then
+      return 'Only works on private message!'
   end]]
   if matches[1] == 'cgpsuper' and matches[2] then
           local group_name = matches[2]
           local group_creator = msg.from.print_name
           create_group_chat (group_creator, group_name, ok_cb, false)
           return 'Group '..string.gsub(group_name, '_', ' ')..' has been created'
-      -[[else
+      [[else
           local pending = is_pending(msg.from.id)
           if pending then
               return 'Your another request still on progress, please wait.'
@@ -88,5 +88,5 @@ return {
   }, 
   run = run,
   hidden = true,
-  -cron = cron
+  cron = cron
 }
