@@ -60,7 +60,6 @@ local function run(msg, matches)
       —return 'Only works on private message!'
   end]]
   if matches[1] == 'cgpsuper' and matches[2] then
-      if is_admin(msg) then
           local group_name = matches[2]
           local group_creator = msg.from.print_name
           create_group_chat (group_creator, group_name, ok_cb, false)
