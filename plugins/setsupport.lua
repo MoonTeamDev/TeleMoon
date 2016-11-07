@@ -1,7 +1,7 @@
  local function run(msg, matches) 
 if matches[1] == "setsupport" then 
 if not is_admin1(msg) then 
-return 'You're not sudo' 
+return 'You,re not admin' 
 end 
 local support = matches[2] 
 redis:set('bot:support',support) 
@@ -21,7 +21,7 @@ end
     end 
 if matches[1] == 'delsupport' then 
 if not is_admin1(msg) then 
-return 'You're not admin' 
+return 'You,re not admin' 
 end 
     local hash = ('bot:support') 
     redis:del(hash) 
