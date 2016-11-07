@@ -1,92 +1,62 @@
-local filename='data/creategroup.lua'
-local cronned = load_from_file(filename)
-
-local function save_cron(msg,text,date)
-  if msg.from.username then
-      username = msg.from.username
-  else
-      username = msg.from.print_name
+do
+function run(msg, matches)
+local text1 = matches[1]
+local text2 = matches[2]
+local text3 = matches[3]
+if not matches[2] then
+  text2 = " "
   end
-  local user_id = tostring(msg.from.id)
-  if not cronned[date] then
-    cronned[date] = {}
+if not matches[3] then
+  text3 = " "
   end
-  local arr = { user_id, username, text } ;
-  table.insert(cronned[date], arr)
-  serialize_to_file(cronned, filename)
-  return 'Saved!'
-end
-
-local function delete_cron(date)
-  for k,v in pairs(cronned) do
-    if k == date then
-    cronned[k]=nil
-    end
+if not matches[2] and not matches[3] then
+  text2 = " "
+  text3 = " "
   end
-  serialize_to_file(cronned, filename)
+  text4 = "@IR_TEAM"
+  local url = URL.escape(text1.." "..text2.." "..text3)
+
+  local answers = {'https://assets.imgix.net/examples/clouds.jpg?blur=200&w=1300&h=600&fit=crop&txt=',
+                   'https://assets.imgix.net/examples/redleaf.jpg?blur=200&w=1300&h=600&fit=crop&txt=',
+                   'https://assets.imgix.net/examples/blueberries.jpg?blur=200&w=1300&h=600&fit=crop&txt=',
+                   'https://assets.imgix.net/examples/butterfly.jpg?blur=200&w=1300&h=600&fit=crop&txt=',
+                   'https://assets.imgix.net/examples/espresso.jpg?blur=200&w=1000&h=400&fit=crop&txt=',
+                   'https://assets.imgix.net/unsplash/transport.jpg?blur=200&w=1300&h=600&fit=crop&txt=',
+                   'https://assets.imgix.net/unsplash/coffee.JPG?blur=200&w=1300&h=600&fit=crop&txt=',
+                   'https://assets.imgix.net/unsplash/citystreet.jpg?blur=200&w=1300&h=600&fit=crop&txt=',
+           'http://assets.imgix.net/examples/vista.png?blur=200&w=1300&h=600&fit=crop&txt='}
+
+local fonts = {'American%20Typewriter%2CBold','Arial%2CBoldItalicMT','Arial%2CBoldMT','Athelas%2CBold',
+               'Baskerville%2CBoldItalic','Charter%2CBoldItalic','DIN%20Alternate%2CBold','Gill%20Sans%2CUltraBold',
+         'PT%20Sans%2CBold','Seravek%2CBoldItalic','Verdana%2CBold','Yuanti%20SC%2CBold','Avenir%20Next%2CBoldItalic',
+         'Lucida%20Grande%2CBold','American%20Typewriter%20Condensed%2CBold','rial%20Rounded%20MT%2CBold','Chalkboard%20SE%2CBold',
+         'Courier%20New%2CBoldItalic','Charter%20Black%2CItalic','American%20Typewriter%20Light'}
+
+local colors = {'00FF00','6699FF','CC99CC','CC66FF','0066FF','000000','CC0066','FF33CC','FF0000','FFCCCC','FF66CC','33FF00','FFFFFF','00FF00'}
+
+local f = fonts[math.random(#fonts)]
+
+local c = colors[math.random(#colors)]
+
+local url = answers[math.random(#answers)]..url.."&txtsize=120&txtclr="..c.."&txtalign=middle,center&txtfont="..f.."%20Condensed%20Medium&mono=ff6598cc=?markscale=60&markalign=center%2Cdown&mark64=QFVCX0NICg"
+  
+local randoms = math.random(1000,900000)
+local randomd = randoms..".jpg"
+local cb_extra = {file_path=file}
+local receiver = get_receiver(msg)
+local file = download_to_file(url,randomd)
+ send_photo(receiver, file, rmtmp_cb, cb_extra)
+
 end
-
-local function cron()
-  for date, values in pairs(cronned) do
-    if date < os.time() then —time's up
-      local user_id = values[1][1]
-      create_group_chat ("user#id"..user_id, values[1][3], ok_cb, false)
-      send_large_msg("user#id"..user_id, "Group \""..values[1][3].."\" has been created!")
-      delete_cron(date) —TODO: Maybe check for something else? Like user
-      — delete from redis
-      local hash =  'waiting:'..user_id
-        redis:del(hash)
-  end
-
-  end
-end
-
-local function is_pending(user_id)
-  local hash =  'waiting:'..user_id
-  local wait = redis:get(hash)
-  return wait or false
-end
-
-local function actually_run(msg, delay,text)
-  save_cron(msg,text,delay)
-  local hash =  'waiting:'..msg.from.id
-  redis:set(hash, true)
-  return "Please wait, group '"..text.."' will be created shortly"
-end
-
-local function run(msg, matches)
-  local wait = 3 — waiting time (in minute) #you can change the value as you want#
-  [[if is_chat_msg(msg) then
-      return 'Only works on private message!'
-  end]]
-  if matches[1] == 'cgpsuper' and matches[2] then
-          local group_name = matches[2]
-          local group_creator = msg.from.print_name
-          create_group_chat (group_creator, group_name, ok_cb, false)
-          return 'Group '..string.gsub(group_name, '_', ' ')..' has been created'
-      [[else
-          local pending = is_pending(msg.from.id)
-          if pending then
-              return 'Your another request still on progress, please wait.'
-          end
-          local wait = wait*60
-          local date = wait+os.time()
-          local text = matches[2]
-          local text = actually_run(msg, date, text)
-          return text]]
-      end
-  end
-end
-
 return {
-  description = "Plugin to create a new group In @TelePlugin",
-  usage = {
-    "cgpsuper <group_name> : Create a new moderation @TelePlugin group",
-  },
   patterns = {
-    "^cgpsuper (.*)$",
-  }, 
-  run = run,
-  hidden = true,
-  cron = cron
+    "^[/#!]imagepro (.+) (.+) (.+) (.+) (.+)$",
+    "^[/#!]imagepro (.+) (.+) (.+) (.+)$",
+  "^[/#!]imagepro (.+) (.+) (.+)$",
+  "^[/#!]imagepro (.+) (.+)$",
+    "^[/#!]imagepro (.+)$",
+  },
+  run = run
 }
+
+end
