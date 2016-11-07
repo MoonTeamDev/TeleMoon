@@ -262,7 +262,7 @@ end
 		receiver = get_receiver(msg)
 		reload_plugins(true)
 		post_msg(receiver, "", ok_cb, false)
-		return "تغیرات انجام شد!\n📋 @TeleCrazych"
+		return "Reloaded!"
 	end
 	--[[*For Debug*
 	if matches[1] == "vardumpmsg" and is_admin1(msg) then
