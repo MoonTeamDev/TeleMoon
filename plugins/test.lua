@@ -24,7 +24,7 @@ local function run(msg,matches)
       if matches[1]:lower() == "voice"  then 
      redis:get("video:audio") 
     send_large_msg(receiver, '', ok_cb, false) 
-        load_audio(msg.reply_id, tovoice, msg) 
+        load_audio(msg.reply_id, toaudio, msg) 
     end 
 end   
 end 
