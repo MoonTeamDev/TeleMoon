@@ -12,10 +12,8 @@ local function run(msg, matches)
             text = text..'Hi owner\n\n'
           elseif is_momod2(msg.from.id, msg.to.id) then
             text = text..'Hi moderator\n\n'
-      else
-            text = text..'Hi chos user\n\n'
-       end
-       else
+     
+           else
         text = text..'Hi '..value..'  \n\n'
       end
  return text
