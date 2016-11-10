@@ -954,6 +954,7 @@ patterns = {
    "%[(photo)%]", 
 "%[(video)%]", 
    "%[(audio)%]", 
+   "%[(voice)%]",
  }, 
 run = run, 
 } 
