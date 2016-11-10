@@ -6,12 +6,12 @@ function run(msg, matches)
 end 
 
 return { 
-  description = "دریافت ایدی به صورت استیکر", 
+  description = "sticker id", 
   usage = { 
-    "پلاگین فان!", 
+    "Fun", 
   }, 
   patterns = { 
-   "^myid$", 
+   "^[!#/]idsticker$", 
   }, 
   run = run 
 } 
