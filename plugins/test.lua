@@ -15,7 +15,8 @@ local function toaudio(msg, success, result)
   end 
 end 
 -----------------------  
-local receiver = get_receiver(msg) 
+local function run(msg,matches)
+  local receiver = get_receiver(msg) 
     local group = msg.to.id 
     if msg.reply_id then 
        if msg.to.type == 'video' and redis:get("video:audio") then 
