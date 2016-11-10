@@ -1,5 +1,3 @@
-
-do 
 local function toaudio(msg, success, result) 
   local receiver = get_receiver(msg) 
   if success then 
