@@ -1,23 +1,32 @@
-function run(msg, matches)
-        local hash = 'rank:variables'
-   local text = ''
+local function run(msg, matches)
+ local makan = 90285047
+   local hash = 'rank:variables'
+   local text = 'Hi '..value..' '
      local value = redis:hget(hash, msg.from.id)
       if not value then
-   text = text..'سلام  '..msg.from.print_name' \n\n'
-  end
- else 
-  text = text..'سلام '..value..'  \n\n'
+         if msg.from.id == tonumber(makan) then 
+            text = text..'سلام بابایی جونم (^_^)\n\n'
+          elseif is_admin2(msg.from.id) then
+            text = text..'سلام \n\n'
+           elseif is_owner2(msg.from.id, msg.to.id) then
+            text = text..'سلام \n\n'
+          elseif is_momod2(msg.from.id, msg.to.id) then
+            text = text..'سلام \n\n'
+      else
+            text = text..'سلام\n\n'
+      end
  return text
-end
-
-return {
-  description = "Help owner.  ", 
-  usage = {
-    "ownerhelp: Show help for owners.",
-  },
-  patterns = {
-    "^([Ss]lm)$",
-  "^(سلام)$",
-  }, 
-  run = run,
-}
+     
+ end
+ 
+ return {
+   patterns = {
+ 
+ 
+ "^[Ss]lm$",
+ "^سلام$",
+ "^salam",
+ 
+   }, 
+   run = run 
+ }
