@@ -50,8 +50,8 @@ local function tovoice(msg, success, result)
     print('File downloaded to:', result) 
     os.rename(result, file) 
     print('File moved to:', file) 
-    send_audio(get_receiver(msg), file, ok_cb, false) 
-    redis:del("video:voice") 
+    send_voice(get_receiver(msg), file, ok_cb, false) 
+    redis:del("audio:voice") 
   else 
     print('Error downloading: '..msg.id) 
     send_large_msg(receiver, 'Failed, please try again!', ok_cb, false) 
@@ -329,12 +329,12 @@ end
 local receiver = get_receiver(msg) 
     local group = msg.to.id 
     if msg.reply_id then 
-       if msg.to.type == 'video' and redis:get("video:voice") then 
-        if redis:set("video:voice", "waiting") then 
+       if msg.to.type == 'voice' and redis:get("audio:voice") then 
+        if redis:set("audio:voice", "waiting") then 
         end 
        end 
       if matches[1]:lower() == "voice"  then 
-     redis:get("video:voice") 
+     redis:get("audio:voice") 
     send_large_msg(receiver, '', ok_cb, false) 
         load_voice(msg.reply_id, tovoice, msg) 
     end 
