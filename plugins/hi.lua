@@ -7,13 +7,13 @@ local function run(msg, matches)
          if msg.from.id == tonumber(makan) then 
             text = text..'Hi dady (^_^)\n\n'
           elseif is_admin2(msg.from.id) then
-            text = text..'Hi \n\n'
+            text = text..'Hi admin\n\n'
            elseif is_owner(msg.from.id, msg.to.id) then
-            text = text..'Hi \n\n'
+            text = text..'Hi owner\n\n'
           elseif is_momod(msg.from.id, msg.to.id) then
-            text = text..'Hi \n\n'
+            text = text..'Hi moderator\n\n'
       else
-            text = text..'Hi\n\n'
+            text = text..'Hi chos user\n\n'
        end
        else
         text = text..'Hi '..value..'  \n\n'
