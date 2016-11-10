@@ -2,7 +2,7 @@ do
 function run(msg, matches) 
  
       
-      local url , res = http.request('http://api.gpmod.ir/date/')
+      local url , res = http.request('http://api.gpmod.ir/time/')
 
       local jdat = json:decode(url)
       local url = "http://2wap.org/usf/text_sm_gen/sm_gen.php?text="..jdat.ENdate
