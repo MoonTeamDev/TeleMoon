@@ -16,8 +16,6 @@ return {
     "/keep calm font text: ساخت لوگو",
   },
   patterns = {
-"^[/!]([Kk][Ee][Ee][Pp][Cc][Aa][Ll][Mm]) (.+)$",
-"^[/!]([Kk][Ee][Ee][Pp][Cc][Aa][Ll][Mm]) (.+) (.+)$",
 "^[/!]([Kk][Ee][Ee][Pp][Cc][Aa][Ll][Mm]) (.+) (.+) (.+)$",
   },
   run = run
