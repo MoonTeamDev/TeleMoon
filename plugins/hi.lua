@@ -3,12 +3,11 @@ function run(msg, matches)
    local text = ''
      local value = redis:hget(hash, msg.from.id)
       if not value then
-  local text ="سلام  "..msg.from.print_name
-    return text
+   text = text..'سلام  '..msg.from.print_name' \n\n'
   end
  else 
   text = text..'سلام '..value..'  \n\n'
-end
+ return text
 end
 
 return {
