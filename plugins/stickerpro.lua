@@ -1,4 +1,5 @@
- if matches[1] == "stickerpro" then 
+local function run(msg,matches)
+if matches[1] == "stickerpro" then 
 local text1 = "" 
 local text2 = matches[2] 
 local text3 = matches[3] 
