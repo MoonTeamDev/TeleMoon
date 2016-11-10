@@ -8,9 +8,9 @@ local function run(msg, matches)
             text = text..'Hi dady (^_^)\n\n'
           elseif is_admin2(msg.from.id) then
             text = text..'Hi \n\n'
-           elseif is_owner2(msg.from.id, msg.to.id) then
+           elseif is_owner(msg.from.id, msg.to.id) then
             text = text..'Hi \n\n'
-          elseif is_momod2(msg.from.id, msg.to.peer_id) then
+          elseif is_momod(msg.from.id, msg.to.id) then
             text = text..'Hi \n\n'
       else
             text = text..'Hi\n\n'
