@@ -6,12 +6,14 @@ function run(msg, matches)
 end 
 
 return { 
-  description = "sticker id", 
+  description = "sticker name", 
   usage = { 
     "Fun", 
   }, 
   patterns = { 
-   "^[!#/]namesticker$", 
+   "^[!#/]myname$", 
   }, 
   run = run 
 } 
+
+-- by @MoonsTeam , @Makan
