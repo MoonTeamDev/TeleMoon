@@ -13,7 +13,7 @@ if not matches[2] and not matches[3] then
   text2 = " " 
   text3 = " " 
   end 
-  text4 = "[pika]" 
+  text4 = "[TeleMoon]" 
   local url = URL.escape(text1.." "..text2.." "..text3) 
   local answers = {'https://assets.imgix.net/examples/clouds.jpg?blur=200&w=1300&h=600&fit=crop&txt=', 
                    'https://assets.imgix.net/examples/redleaf.jpg?blur=200&w=1300&h=600&fit=crop&txt=', 
