@@ -8,6 +8,8 @@ function run(msg, matches)
   end
  else 
   text = text..'سلام '..value..'  \n\n'
+end
+end
 
 return {
   description = "Help owner.  ", 
