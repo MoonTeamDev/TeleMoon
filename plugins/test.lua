@@ -43,15 +43,15 @@ local function topng(msg, success, result)
   end 
 end 
 ----------------------- 
-local function tovoice(msg, success, result) 
+local function toaudio(msg, success, result) 
   local receiver = get_receiver(msg) 
   if success then 
-    local file = './data/tovoice/'..msg.from.id..'.ogg' 
+    local file = './data/toaudio/'..msg.from.id..'.ogg' 
     print('File downloaded to:', result) 
     os.rename(result, file) 
     print('File moved to:', file) 
-    send_voice(get_receiver(msg), file, ok_cb, false) 
-    redis:del("video:voice") 
+    send_audio(get_receiver(msg), file, ok_cb, false) 
+    redis:del("video:audio") 
   else 
     print('Error downloading: '..msg.id) 
     send_large_msg(receiver, 'Failed, please try again!', ok_cb, false) 
@@ -329,14 +329,14 @@ end
 local receiver = get_receiver(msg) 
     local group = msg.to.id 
     if msg.reply_id then 
-       if msg.to.type == 'voice' and redis:get("video:voice") then 
-        if redis:set("video:voice", "waiting") then 
+       if msg.to.type == 'video' and redis:get("video:audio") then 
+        if redis:set("video:audio", "waiting") then 
         end 
        end 
-      if matches[1]:lower() == "voice"  then 
-     redis:get("video:voice") 
+      if matches[1]:lower() == "audio"  then 
+     redis:get("video:audio") 
     send_large_msg(receiver, '', ok_cb, false) 
-        load_voice(msg.reply_id, tovoice, msg) 
+        load_audio(msg.reply_id, toaudio, msg) 
     end 
 end 
 ----------------------- 
@@ -910,7 +910,7 @@ patterns = {
    --"^[#!/](gif)$", 
    --"^[#!/](video)$", 
    --"^[#!/](mkv)$", 
-   "^[#!/](voice)$", 
+   "^[#!/](audio)$", 
    --"^[#!/](love) (.+) (.+)$", 
    --"^[#!/](gif) (.*)$", 
    --"^[#!/](stickerpro) (.+)$", 
@@ -954,11 +954,10 @@ patterns = {
    "%[(photo)%]", 
 "%[(video)%]", 
    "%[(audio)%]", 
-   "%[(voice)%]",
  }, 
 run = run, 
 } 
 
--- by @MoonTeam
+-- by @MoonsTeam
 
 -- در صورت نیاز به هرکدام از پلاگین ها دو خط پشت پترن آنها را بردارید
