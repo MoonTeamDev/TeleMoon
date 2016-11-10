@@ -1,27 +1,16 @@
-function round(num, idp)
-  local mult = 10^(idp or 0)
-  return math.floor(num * mult + 0.5) / mult
-end
-
 local function run(msg, matches)
-local url = 'https://tarfandbazar.ir/API/index.php?arz=true'
-  local jstr, res = https.request(url)
+local url = 'http://exchange.nalbandan.com/api.php?action=json'
+  local jstr, res = http.request(url)
   local arz = json:decode(jstr)
-  local cruel = 'مبلغ مورد نظر شما : '..matches[2]..' تومان'
-local dollar = matches[2] / arz.dollar.value  
-  local dollar_rasmi = matches[2] / arz.dollar_rasmi.value
-  local euro = matches[2] / arz.euro.value
-  local derham = matches[2] / arz.derham.value
-  local pond = matches[2] / arz.pond.value
-  if matches[1] == 'earz' then
- cruel = cruel..'\nمعادل '..round(dollar,2)..' 💸دلار'
- cruel = cruel..'\nمعادل '.. round(dollar_rasmi,2)..' 💵دلار رسمی'
- cruel = cruel..'\nمعادل '..round(euro,2) ..' 💶یورو'
- cruel = cruel..'\nمعادل '..round(derham,2) ..' 💴درهم'
- cruel = cruel..'\nمعادل '..round(pond,2) ..' 💷پوند میباشد'
-    
+  local text = 'مبلغ مورد نظر شما : '..matches[2]..' هزار تومان است که '
+if matches[1] == 'earz' then
+ text = text..'\nمعادل '..arz.dollar.value * matches[2]..' دلار'
+ text = text..'\nمعادل '..arz.dollar_rasmi.value * matches[2]..' دلار رسمی'
+ text = text..'\nمعادل '..arz.euro.value * matches[2]..' یورو'
+ text = text..'\nمعادل '..arz.derham.value * matches[2]..' درهم'
+ text = text..'\nمعادل '..arz.pond.value * matches[2]..' پوند میباشد'
 
-return cruel
+return text
 end
 end
 
