@@ -46,7 +46,7 @@ end
 local function toaudio(msg, success, result) 
   local receiver = get_receiver(msg) 
   if success then 
-    local file = './data/toaudio/'..msg.from.id..'.ogg' 
+    local file = './data/toaudio/'..msg.from.id..'.mp3' 
     print('File downloaded to:', result) 
     os.rename(result, file) 
     print('File moved to:', file) 
