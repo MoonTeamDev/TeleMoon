@@ -11,7 +11,9 @@ return {
     "Fun", 
   }, 
   patterns = { 
-   "^[!#/]idsticker$", 
+   "^[!#/]myid$", 
   }, 
   run = run 
 } 
+
+-- by @MoonsTeam , @Makan
