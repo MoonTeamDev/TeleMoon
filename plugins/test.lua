@@ -34,7 +34,6 @@ return {
 patterns = { 
    "^[#!/](audio)$", 
    "%[(document)%]", 
-   "%[(photo)%]", 
    "%[(video)%]", 
    "%[(audio)%]", 
  }, 
