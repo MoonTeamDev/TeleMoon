@@ -32,9 +32,6 @@ end
 return { 
 patterns = { 
    "^[#!/](audio)$", 
-   "%[(document)%]", 
-   "%[(photo)%]", 
-"%[(video)%]", 
    "%[(audio)%]", 
  }, 
 run = run, 
