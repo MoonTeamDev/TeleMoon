@@ -115,7 +115,7 @@ return "<b>Hi "..msg.from.first_name.."</b>\n"
 .."<b>Your Channel</b>∶"..(redis:get(hash7)  or '<b>NO Channel</b>').."\n" 
 .."<b>Your insta</b>∶"..(redis:get(hash8)  or '<b>NO insta</b>').."\n" 
 .."<b>Your Site</b>∶"..(redis:get(hash10)  or '<b>NO Site</b>').."\n\n" 
-.."@MoonsTeam".."\n" 
+.."<b>our channel</b>: @MoonsTeam".."\n" 
 
 end 
 if matches[1]:lower()== 'delmyinfo' then 
