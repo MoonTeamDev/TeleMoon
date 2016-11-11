@@ -13,7 +13,7 @@ end
 return {
   description = "تبدیل متن به لوگو",
   usage = {
-    "/keep calm font text: ساخت لوگو",
+    "/keepcalm text text text: ساخت لوگو",
   },
   patterns = {
 "^[/!]([Kk][Ee][Ee][Pp][Cc][Aa][Ll][Mm]) (.+) (.+) (.+)$",
