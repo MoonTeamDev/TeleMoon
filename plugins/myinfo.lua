@@ -106,16 +106,16 @@ end
 
 if matches[1]:lower() == 'myinfo' then 
 return "<b>Hi "..msg.from.first_name.."</b>\n" 
-.."\n".."<b>Your Name</b>∶"..(redis:get(hash3) or '<b>NO NAME</b>').."\n" 
-.."<b>Your Age</b>∶"..(redis:get(hash2)  or '<b>NO AGE</b>').."\n" 
-.."<b>Your Sex</b>∶"..(redis:get(hash4)  or '<b>NO SEX</b>').."\n" 
-.."<b>Your Address</b>∶"..(redis:get(hash9)  or '<b>NO Address</b>').."\n" 
-.."<b>Your Education</b>∶"..(redis:get(hash5)  or '<b>NO Education</b>').."\n" 
-.."<b>Your Number</b>∶"..(redis:get(hash6)  or '<b>NO Number</b>').."\n" 
-.."<b>Your Channel</b>∶"..(redis:get(hash7)  or '<b>NO Channel</b>').."\n" 
-.."<b>Your insta</b>∶"..(redis:get(hash8)  or '<b>NO insta</b>').."\n" 
-.."<b>Your Site</b>∶"..(redis:get(hash10)  or '<b>NO Site</b>').."\n\n" 
-.."<b>our channel</b>: @MoonsTeam".."\n" 
+.."\n".."<b>Your Name</b>∶"..(redis:get(hash3) or '<i>NO NAME</i>').."\n" 
+.."<b>Your Age</b>∶"..(redis:get(hash2)  or '<i>NO AGE</i>').."\n" 
+.."<b>Your Sex</b>∶"..(redis:get(hash4)  or '<i>NO SEX</i>').."\n" 
+.."<b>Your Address</b>∶"..(redis:get(hash9)  or '<i>NO Address</i>').."\n" 
+.."<b>Your Education</b>∶"..(redis:get(hash5)  or '<i>NO Education</i>').."\n" 
+.."<b>Your Number</b>∶"..(redis:get(hash6)  or '<i>NO Number</i>').."\n" 
+.."<b>Your Channel</b>∶"..(redis:get(hash7)  or '<i>NO Channel</i>').."\n" 
+.."<b>Your insta</b>∶"..(redis:get(hash8)  or '<i>NO insta</i>').."\n" 
+.."<b>Your Site</b>∶"..(redis:get(hash10)  or '<i>NO Site</i>').."\n\n" 
+.."<b>Our channel</b>∶ @MoonsTeam".."\n" 
 
 end 
 if matches[1]:lower()== 'delmyinfo' then 
