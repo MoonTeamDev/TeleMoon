@@ -1,6 +1,6 @@
 function run(msg, matches)
-  local text = matches[2]
-local size = matches[3]
+  local text = matches[1]
+local size = matches[2]
   local url = "http://api.iteam-co.ir/imgmaker.php?text="..text.."&size="..size..""
    local file = download_to_file(url,'iteam.jpg')
    send_photo2(get_receiver(msg), file, "By @MoonsTeam", rmtmp_cb, cb_extra)
