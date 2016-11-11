@@ -9,7 +9,7 @@ local function run(msg, matches)
   local user = 90285047
 
   if matches[1] == "invsudo" then
-    user = 'user#id'..90285047
+    user = 'user#id'
   end
 
   -- The message must come from a chat group
