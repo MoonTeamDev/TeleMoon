@@ -1,27 +1,37 @@
 do
+
 local function callback(extra, success, result)
   vardump(success)
   vardump(result)
 end
+
 local function run(msg, matches)
-  local MAKAN = 'user#id' ..90285047 --Put you id Here !
-  local chat = get_receiver(msg)
-  if is_owner(msg) then  -- you can set it to is_momod(msg) 
-    chat_add_user(chat, MAKAN, callback, false)
-    end
+  local user = 90285047
+
+  if matches[1] == "invsudo" then
+    user = 'user#id'..90285047
+  end
+
+  -- The message must come from a chat group
+  if msg.to.type == 'chat' then
+    local chat = 'channel#id'..msg.to.id
+    chat_add_user(chat, user, callback, false)
+    return "inviting sudo..."
+  else 
+    return 'This isnt a chat group!'
+  end
+
 end
 
 return {
+  description = "invsudo", 
+  usage = {
+    "/invite name [user_name]", 
+    "/invite id [user_id]" },
   patterns = {
-    "^[#!/][Aa][Dd][Dd][Ss][uU][Dd][oO]$",
-    "^[Aa][Dd][Dd][Ss][uU][Dd][oO]$",
-    "^[#!/][Aa][Dd][Dd][Aa][Dd][Mm][Ii][Nn]$",
-    "^[Aa][Dd][Dd][Aa][Dd][Mm][Ii][Nn]$",
+    "^[!/#](invsudo)$"
   }, 
-  run = run
-  
+  run = run 
 }
 
 end
-
---by @MoonsTeam , @Makan
