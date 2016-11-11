@@ -1,7 +1,6 @@
 function run(msg, matches)
   local text = matches[1]
-local size = matches[2]
-  local url = "http://api.iteam-co.ir/imgmaker.php?text="..text.."&size="..size..""
+  local url = "http://2wap.org/usf/text_sm_gen/sm_gen.php?text="..text.."
    local file = download_to_file(url,'iteam.jpg')
    send_photo2(get_receiver(msg), file, "By @MoonsTeam", rmtmp_cb, cb_extra)
 
@@ -15,7 +14,7 @@ return {
     "ساخت لوگو",
   },
   patterns = {
-   "^[!#/]logo (.*) (.*)$"
+   "^[!#/]logo (.*)$"
   },
   run = run
 }
