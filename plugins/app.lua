@@ -8,7 +8,7 @@ local function run(msg, matches)
   
     local Store = Store.."\napkmirror :\nhttp://www.apkmirror.com/?s="..URL.escape(matches[1]).."&post_type=app_release&searchtype=apk"
   
-    local Store = Store..'\nappsodo :\nhttp://www.appsodo.com/search_'..URL.escape(matches[1]).."_1"
+    local Store = Store..'\n📱Apple store\n\nappsodo :\nhttp://www.appsodo.com/search_'..URL.escape(matches[1]).."_1"
    
     return Store
 end
