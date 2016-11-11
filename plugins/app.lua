@@ -14,7 +14,7 @@ local function run(msg, matches)
 end
 return {
     patterns = {
-        "^[/!]app (.*)"
+        "^[/#!]app (.*)"
     },
 run = run
 }
