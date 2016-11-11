@@ -105,7 +105,7 @@ end
 end 
 
 if matches[1]:lower() == 'myinfo' then 
-return "<b>Hi "..value.."</b>\n" 
+return "<b>Hi "..msg.from.first_name.."</b>\n" 
 .."\n".."<b>Your Name</b>∶"..(redis:get(hash3) or '<i>NO NAME</i>').."\n" 
 .."<b>Your Age</b>∶"..(redis:get(hash2)  or '<i>NO AGE</i>').."\n" 
 .."<b>Your Sex</b>∶"..(redis:get(hash4)  or '<i>NO SEX</i>').."\n" 
