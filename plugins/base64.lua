@@ -7,7 +7,7 @@ local txt = matches[2]
     cmd:close()
     return 'result : \n\n'..result..'\n»@MoonsTeam«'
 else
-return 'this word is lock'
+return 'This word is locked!'
   end
   if matches[1] == 'decode' and not txt:match('[Rr][Ee][Bb][Oo][Oo][Tt]') and not txt:match('[Rr][Mm') then
     local text = matches[2]
