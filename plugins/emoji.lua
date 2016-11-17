@@ -10,10 +10,10 @@ end
 return { 
   description = "تبدیل متن به لوگو", 
   usage = { 
-    "/emoji text text: ساخت لوگو", 
+    "/sticker text: ساخت لوگو", 
   }, 
   patterns = { 
-   "^[/!#][Ee]moji (.+)$", 
+   "^[/!#][Ss]ticker (.+)$", 
   }, 
   run = run 
 } 
