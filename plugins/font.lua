@@ -1,7 +1,4 @@
 local function run(msg, matches)
-	if not is_owner(msg) then
-		return "فقط برای صاحب گروه" 
-	end
 	if #matches < 2 then
 		return "بعد از این دستور، با قید یک فاصله کلمه یا جمله ی مورد نظر را جهت زیبا نویسی وارد کنید"
 	end
