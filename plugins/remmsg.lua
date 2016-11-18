@@ -48,8 +48,8 @@ end
 end
 return {
     patterns = {
-        '^[!/#](remmsg) (%d*)$'
-        '^[!/#](rmmsg) (%d*)$'
+        '^[!/#](remmsg) (%d*)$',
+        '^[!/#](rmmsg) (%d*)$',
         '^[!/#](rmsg) (%d*)$'
     },
     run = run
