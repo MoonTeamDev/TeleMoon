@@ -81,8 +81,8 @@ return {
 	description = "iranian Writer",
 	usage = {"font [text] : زیبا نویسی",},
 	patterns = {
-		"^([Ff]ont) (.*)",
-		"^([Ff]ont)$",
+		"^[!#/]([Ff]ont) (.*)",
+		"^[!#/]([Ff]ont)$",
 		},
 	run = run
 }
