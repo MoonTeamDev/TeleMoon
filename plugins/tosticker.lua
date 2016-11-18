@@ -33,8 +33,6 @@ end
 return { 
 patterns = { 
    "^[#!/](sticker)$", 
-   "%[(document)%]", 
-   "%[(photo)%]",  
  }, 
 run = run, 
 } 
