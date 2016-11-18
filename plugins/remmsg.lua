@@ -21,7 +21,7 @@ if matches[1] == 'remmsg' and is_sudo(msg) then
 else
 return "Only for sudo!"
 end
-if matches[1] == 'remmsg' and is_owner2(msg) then
+if matches[1] == 'remmsg' and is_owner(msg) then
             if msg.to.type == 'channel' then
             if tonumber(matches[2]) > 999 or tonumber(matches[2]) < 2 then
             return "Error!"
