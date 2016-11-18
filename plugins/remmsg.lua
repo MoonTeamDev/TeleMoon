@@ -9,7 +9,7 @@ send_msg(extra.chatid, 'Done!', ok_cb, false)
 end
 end
 local function run(msg, matches)
-elseif matches[1] == 'remmsg' and is_sudo(msg) then
+if matches[1] == 'remmsg' and is_sudo(msg) then
             if msg.to.type == 'channel' then
             if tonumber(matches[2]) > 9999 or tonumber(matches[2]) < 1 then
             return "Error!"
@@ -21,7 +21,7 @@ elseif matches[1] == 'remmsg' and is_sudo(msg) then
 else
 return "Only for sudo!"
 end
-if matches[1] == 'remmsg' and is_owner(msg) then
+elseif matches[1] == 'remmsg' and is_owner(msg) then
             if msg.to.type == 'channel' then
             if tonumber(matches[2]) > 999 or tonumber(matches[2]) < 1 then
             return "Error! +999 only for sudo."
