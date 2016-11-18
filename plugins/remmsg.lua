@@ -9,22 +9,17 @@ send_msg(extra.chatid, 'Done!', ok_cb, false)
 end
 end
 local function run(msg, matches)
-if matches[1] == 'remmsg' and is_sudo(msg) then
-            if msg.to.type == 'channel' then
-            if tonumber(matches[2]) > 9999 or tonumber(matches[2]) < 1 then
-            return "Error!"
-            end
-elseif matches[1] == 'remmsg' and is_owner(msg) then
+if matches[1] == 'remmsg' and is_owner(msg) then
             if msg.to.type == 'channel' then
             if tonumber(matches[2]) > 999 or tonumber(matches[2]) < 1 then
-            return "Error! +999 only for sudo."
+            return "Error!"
             end
             get_history(msg.to.peer_id, matches[2] + 1 , history , {chatid = msg.to.peer_id, con = matches[2]})
         else
                          return "Only for supergroup"
         end
 else
-return "Only for owner!"
+return "Only for mods!"
 end
 end
 return {
