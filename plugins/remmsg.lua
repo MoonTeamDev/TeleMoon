@@ -21,7 +21,8 @@ if matches[1] == 'remmsg' and is_sudo(msg) then
 else
 return "Only for mods!"
 end
-if matches[1] == 'rmmsg' and is_owner(msg) then
+end
+if matches[1] == 'remmsg' and is_owner(msg) then
             if msg.to.type == 'channel' then
             if tonumber(matches[2]) > 999 or tonumber(matches[2]) < 1 then
             return "Error!"
@@ -32,6 +33,7 @@ if matches[1] == 'rmmsg' and is_owner(msg) then
         end
 else
 return "Only for owner!"
+end
 end
 if matches[1] == 'remmsg' and is_momod(msg) then
             if msg.to.type == 'channel' then
