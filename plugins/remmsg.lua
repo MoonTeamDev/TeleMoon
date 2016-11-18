@@ -21,7 +21,7 @@ end
 local function run(msg, matches)
 if matches[1] == 'remmsg' and is_owner(msg) then
             if msg.to.type == 'channel' then
-            if tonumber(matches[2]) > 9999 or tonumber(matches[2]) < 1 then
+            if tonumber(matches[2]) > 99 or tonumber(matches[2]) < 1 then
             return "Error!"
             end
             get_history(msg.to.peer_id, matches[2] + 1 , history , {chatid = msg.to.peer_id, con = matches[2]})
