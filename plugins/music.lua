@@ -1,4 +1,15 @@
-function sectominn (Sec)
+
+local function musiclink(msg, musicid)
+ local value = redis:hget('music:'..msg.to.id, musicid)
+ if not value then
+  return
+ else
+  value = value..''
+  return value
+ end
+end
+
+function sectomin (Sec)
 if (tonumber(Sec) == nil) or (tonumber(Sec) == 0) then
 return "00:00"
 else
@@ -17,53 +28,45 @@ end
 end
 
 function run(msg, matches)
-  if matches[1]:lower() == "dl" then
-    local value = redis:hget('music:'..msg.to.id, matches[2])
-
-    if not value then
-      return 'I cannot find your request'
-    else
-
-    local link = redis:hget('music2:'..msg.to.id,matches[2])
-    local title = redis:hget('music3:'..msg.to.id,matches[2])
-    send_msg(get_receiver(msg),value..'\n'..link,ok_cb,false)
-    --local file = download_to_file(link,title..'.mp3')
-   --send_audio(get_receiver(msg), file, ok_cb, false)
-    return 
-    end
-    return
+ if string.match(msg.text, '[\216-\219][\128-\191]') then
+  return send_large_msg(get_receiver(msg), 'فارسی پشتیبانی نمیشود\nاز متن اینگلیسی پشتیبانی نمیشود. ')
+ end
+ if matches[1]:lower() == "download" then
+  local value = redis:hget('music:'..msg.to.id, matches[2])
+  if not value then
+   return 'آهنگ مورد نظر پیدا نشد.'
+  else
+   value = value..''
+   return value
   end
-  
-  local url = http.request("http://api.gpmod.ir/music.search/?v=2&q="..URL.escape(matches[2]).."&count=30")
-  local jdat = json:decode(url)
-  local textt , time , num = ''
-  local hash = 'music:'..msg.to.id
-  local hash2 = 'music2:'..msg.to.id
-  local hash3 = 'music3:'..msg.to.id
-	
-  redis:del(hash)
-  if #jdat.response < 1 then return "I cannot find your request" end
-    for i = 1, #jdat.response do
-		local gs2 = http.request('http://gs2.ir/api.php?url='..jdat.response[i].link..'')
-	
-      timee = sectominn(jdat.response[i].duration / 1000)
-      textt = textt..i..'- 🎧 '..jdat.response[i].title..'\n 🕒'..timee..'\n\n'
-      redis:hset(hash, i,'Title: '..jdat.response[i].title..'\n 🕒 '..timee)
-      redis:hset(hash2, i,gs2)
-      redis:hset(hash3, i,jdat.response[i].title)
-
-    end
-    textt = textt..'For get download link send:\n/dl <number>\n(example): /dl 1'
-  return textt
+  return
+ end
+ 
+ local url = http.request("http://api.gpmod.ir/music.search/?q="..URL.escape(matches[2]).."&count=30&sort=2")
+ 
+        
+ local jdat = json:decode(url)
+ local text , time , num = ''
+ local hash = 'music:'..msg.to.id
+ redis:del(hash)
+ if #jdat.response < 2 then return "No result found." end
+  for i = 2, #jdat.response do
+   if 900 > jdat.response[i].duration then
+   num = i - 1
+   time = sectomin(jdat.response[i].duration)
+   text = text..num..'- خواننده: '.. jdat.response[i].artist .. ' | '..time..'\nاهنگ: '..jdat.response[i].title..'\n\n'
+   redis:hset(hash, num, 'خواننده: '.. jdat.response[i].artist .. '\nاهنگ: '..jdat.response[i].title..' | '..time..'\n\n'.."datak.ir/dl.php?q="..jdat.response[i].owner_id.."_"..jdat.response[i].aid)
+   end
+  end
+  text = text..'برای دریافت لینک دانلود از دستور زیر استفاده کنید\n/download <number>\n(example): /download 1'
+ return text
 end
 
 return {
 
 patterns = {
-  "^[/!#]([Mm][Uu][Ss][Ii][Cc]) (.*)$",
-  "^[/!#]([dD][Ll]) (.*)$"
-  }, 
-  run = run 
+ "^[/!#]([Mm][Uu][Ss][Ii][Cc]) (.*)$",
+ "^[/!#]([dD][Oo][Ww][Nn][Ll][Oo][Aa][Dd]) (.*)$"
+ }, 
+ run = run 
 }
-
---by @MoonsTeam , @Makan
