@@ -81,8 +81,7 @@ do
     description = 'Search and get music from pleer',
     usage = '/music [track name or artist and track name]: Search and get the music',
     patterns = {
-    '^[!/#]music (.*)$',
-    '^[!/#]getmusic (.*)$'
+    '^[!/#]music (.*)$'
     },
     run = run
 }
