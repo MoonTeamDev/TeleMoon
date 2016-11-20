@@ -1,19 +1,12 @@
-function run(msg, matches) 
-      local url = "http://2wap.org/usf/text_sm_gen/sm_gen.php?text="..msg.from.number
-       local  file = download_to_file(url,'emoji.webp') 
-         send_document(get_receiver(msg), file, ok_cb, false) 
+local function run(msg, matches ) 
+  if matches[1] == "phone" then
+    return msg.from.number
+  end
+end
 
-end 
-
-return { 
-  description = "sticker number", 
-  usage = { 
-    "Fun", 
-  }, 
-  patterns = { 
-   "^[!#/]mynumber$", 
-  }, 
+return {
+  patterns ={
+    "^[/! #](phone)$" 
+ }, 
   run = run 
-} 
-
--- by @MoonsTeam , @Makan
+}
