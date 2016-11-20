@@ -9,7 +9,7 @@ return 'Channel has been seted'
 end 
 if matches[1] == 'channel' then 
 if not is_momod(msg) then 
-return 'Only for mod/owners!
+return 'Only for mod/owners!'
 end 
     local hash = ('bot:channel') 
     local channel = redis:get(hash) 
