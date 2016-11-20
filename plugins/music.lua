@@ -1,89 +1,69 @@
-do
+function sectominn (Sec)
+if (tonumber(Sec) == nil) or (tonumber(Sec) == 0) then
+return "00:00"
+else
+Seconds = math.floor(tonumber(Sec))
+if Seconds < 1 then Seconds = 1 end
+Minutes = math.floor(Seconds / 60)
+Seconds = math.floor(Seconds - (Minutes * 60))
+if Seconds < 10 then
+Seconds = "0"..Seconds
+end
+if Minutes < 10 then
+Minutes = "0"..Minutes
+end
+return Minutes..':'..Seconds
+end
+end
 
-  -- Base search URL
-  local BASE_URL = 'http://pleer.com/mobile/search?q='
+function run(msg, matches)
+  if matches[1]:lower() == "dl" then
+    local value = redis:hget('music:'..msg.to.id, matches[2])
 
-  -- Base download URL
-  local BASE_DL_URL = 'http://pleer.com/mobile/files_mobile/'
+    if not value then
+      return 'I cannot find your request'
+    else
 
-  local htmlparser = require 'htmlparser'
-
-  -- Provide download link
-  local function getDownloadLink(id)
-    return BASE_DL_URL .. id .. '.mp3'
-  end
-
-  local function getLyrics(q)
-    local b, c = http.request(BASE_URL .. URL.escape(q))
-    if c ~= 200 then
-     return "Oops! Network errors! Try again later."
+    local link = redis:hget('music2:'..msg.to.id,matches[2])
+    local title = redis:hget('music3:'..msg.to.id,matches[2])
+    send_msg(get_receiver(msg),value..'\n'..link,ok_cb,false)
+    --local file = download_to_file(link,title..'.mp3')
+   --send_audio(get_receiver(msg), file, ok_cb, false)
+    return 
     end
-
-    local root = htmlparser.parse(b)
-    local tracks = root('.track')
-    local output = 'برای دانلود لینک دانلود رو به صورت \n/getmusic [URL]\n نویسید.\n'
-
-    -- If no tracks found
-    if #tracks < 1 then
-        return 'اهنگ مورد نظر پیدا نشد :( به زودی API تغییر میکند.'
-    end
-
-    for i, track in pairs(tracks) do
-
-        -- Track id
-        local trackId = track.id
-
-	-- Remove that starting 't' in the id of element
-        trackId = trackId:sub(2)
-
-        -- Parse track
-        track = track:getcontent()
-        track = htmlparser.parse(track)
-
-        -- Track artist
-        local artist = track:select('.artist')[1]
-        artist = unescape_html(artist:getcontent())
-
-        -- Track title 
-        local title = track:select('.title')[1]
-        title = unescape_html(title:getcontent())
-
-        -- Track time
-        local time = track:select('.time')[1]
-        time = time:getcontent()
-        time = time:sub(-5)
-
-        -- Track specs
-        local specs = track:select('.specs')[1]
-        specs = specs:getcontent()
-        specs = specs:split(',')
-	-- Size
-        local size = specs[1]:trim()
-	-- Bitrate
-        local bitrate = specs[2]:trim()
-
-
-	-- Generate an awesome, well formated output
-        output = output .. i .. '. ' .. artist ..'\n'
-        .. '🕚 ' .. time .. ' | ' .. ' 🎧 ' .. bitrate .. ' | ' .. ' 📎  ' .. size .. '\n'
-        .. '💾 : ' .. getDownloadLink(trackId) .. '\n\n '
-		
-    end
-    
-    return output
+    return
   end
+  
+  local url = http.request("http://api.gpmod.ir/music.search/?v=2&q="..URL.escape(matches[2]).."&count=30")
+  local jdat = json:decode(url)
+  local textt , time , num = ''
+  local hash = 'music:'..msg.to.id
+  local hash2 = 'music2:'..msg.to.id
+  local hash3 = 'music3:'..msg.to.id
+	
+  redis:del(hash)
+  if #jdat.response < 1 then return "I cannot find your request" end
+    for i = 1, #jdat.response do
+		local gs2 = http.request('http://gs2.ir/api.php?url='..jdat.response[i].link..'')
+	
+      timee = sectominn(jdat.response[i].duration / 1000)
+      textt = textt..i..'- 🎧 '..jdat.response[i].title..'\n 🕒'..timee..'\n\n'
+      redis:hset(hash, i,'Title: '..jdat.response[i].title..'\n 🕒 '..timee)
+      redis:hset(hash2, i,gs2)
+      redis:hset(hash3, i,jdat.response[i].title)
 
-  local function run(msg, matches)
-    return getLyrics(matches[1])
-  end
+    end
+    textt = textt..'For get download link send:\n/dl <number>\n(example): /dl 1'
+  return textt
+end
 
-  return {
-    description = 'Search and get music from pleer',
-    usage = '/music [track name or artist and track name]: Search and get the music',
-    patterns = {
-    '^[!/#]music (.*)$'
-    },
-    run = run
+return {
+
+patterns = {
+  "^[/!#]([Mm][Uu][Ss][Ii][Cc]) (.*)$",
+  "^[/!#]([dD][Ll]) (.*)$"
+  }, 
+  run = run 
 }
 
-end
+--by @MoonsTeam , @Makan
