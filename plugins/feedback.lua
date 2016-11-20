@@ -2,28 +2,28 @@ do
 
 function run(msg, matches)
 
-local fuse = 'شما یک پیام جدید دارید \n\nایدی فرد▶️ : ' .. msg.from.id .. '\n\نام فرد▶ : ' .. msg.from.print_name ..'\n\یوزر نیم▶️ :@ ' .. msg.from.username  ..'\n\nپیام️ :\n\n\n' .. matches[1] 
+local fuse = '⭐Dear mohamad\n\n#newfeedback \n\nuser ID▶️ : ' .. msg.from.id .. '\n\nGroup ID▶' .. msg.to.id .. '\nName▶ : ' .. msg.from.print_name ..'\n\nusername▶️ :@' .. msg.from.username  ..'\n\n message text ❓\n\n\n' .. matches[1]
 local fuses = '!printf user#id' .. msg.from.id
 
 
     local text = matches[1]
- bannedidone = string.find(msg.from.id, '123')
-        bannedidtwo =string.find(msg.from.id, '465')       
-   bannedidthree =string.find(msg.from.id, '678')  
+ bannedidone = string.find(msg.from.id, '88888888')
+        bannedidtwo =string.find(msg.from.id, '8888888888')
+   bannedidthree =string.find(msg.from.id, '153589494')
 
 
         print(msg.to.id)
 
         if bannedidone or bannedidtwo or bannedidthree then                    --for banned people
-                return 'شما ازارسال نظر بن شدید'
+                return '❌You are in feedback blacklist!\n talk to @blackwolf_admin'
  else
 
 
-                 local sends0 = send_msg('chat#90285047', fuse, ok_cb, false)
+                 local sends0 = send_msg('user#90285047', fuse, ok_cb, false)
 
- return 'پیام شما با موفقیت به تیم قدرتمند صلیب فرستاده شد.'
+ return '💡your feedback succesfully recived to @blackwolf_admin'
 
-     
+
 
 end
 
@@ -31,9 +31,9 @@ end
 return {
   description = "Feedback",
 
-  usage = "feedback : پیام خودرا ارسال کنید",
+  usage = "!feedback : send maseage to admins with bot",
   patterns = {
-    "^[Ff]eedback (.*)$"
+    "^[/#!][Ff]eedback (.*)$"
 
   },
   run = run
