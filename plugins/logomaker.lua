@@ -14,7 +14,7 @@ return {
     "/logo text: ساخت لوگو", 
   }, 
   patterns = { 
-   "^[/!#][Ll]ogo (.+) (.*)$", 
+   "^[/!#][Ll]ogo (.+) (.+)$", 
   }, 
   run = run 
 } 
