@@ -1,6 +1,6 @@
 local function run(msg, matches ) 
   if matches[1] == "phone" then
-    return "Number: +"..(msg.from.number or "")
+    return "Number: +"..(number or "")
   end
 end
 
