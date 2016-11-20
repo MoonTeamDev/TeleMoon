@@ -3,7 +3,7 @@
      local text2 = matches[2] 
       local url = "http://api.roonx.com/photo/pic4.php?text="..text1.."&color="..text2
        local  file = download_to_file(url,'emoji.webp') 
-         send_photo(receiver, file, rmtmp_cb, cb_extra) 
+         send_document(get_receiver(msg), file, ok_cb, false) 
 
 end 
 
