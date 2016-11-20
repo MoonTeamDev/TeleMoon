@@ -29,8 +29,8 @@ send_msg(extra.receiver, info, ok_cb, false)
 
 return {
 patterns = {
-"^[!/#]number",
-"^[!/#]phone (.*)",
+"^[!/#]number$",
+"^[!/#]phone (.*)$",
           
 },
 run = run
