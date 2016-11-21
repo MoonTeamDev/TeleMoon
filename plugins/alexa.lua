@@ -13,7 +13,7 @@ if not lc then
 lc = '---'
 end
 local text = '<b>Globally rank</b> : <code>'..data.grank..'</code>\n<b>Country</b> : <code>'..lc..'</code>\n<b>Country rank</b> : <code>'..lrank..'</code>\n<b>Information</b> : <code>'..data.info..'</code>'
- local text = text..'\n\n <a href="http://telegram.me/beatbot_team">BeatBotTeam</a> '
+ local text = text..'\n\n@MoonsTeam '
 send_api_msg(msg, get_receiver_api(msg), text, true, 'html')
 end
 end
