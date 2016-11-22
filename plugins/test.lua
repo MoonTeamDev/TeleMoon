@@ -623,6 +623,33 @@ local function unlock_group_join(msg, data, target)
   end
 end
 
+local function lock_group_welcome(msg, data, target)
+      if not is_momod(msg) then
+        return "شما مدیر گروه نیستید"
+      end
+  local welcoms = data[tostring(target)]['settings']['welcome']
+  if welcoms == 'yes' then
+    return 'پیام خوش امد گویی فعال است'
+  else
+    data[tostring(target)]['settings']['welcome'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'پیام خوش امد گویی فعال شد\nبرای تغییر این پیام از دستور زیر استفاده کنید\n/set welcome <welcomemsg>'
+  end
+end
+local function unlock_group_welcome(msg, data, target)
+      if not is_momod(msg) then
+        return "شما مدیر گروه نیستید"
+      end
+  local welcoms = data[tostring(target)]['settings']['welcome']
+  if welcoms == 'no' then
+    return 'پیام خوش امد گویی غیر فعال است'
+  else
+    data[tostring(target)]['settings']['welcome'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'پیام خوش امد گویی غیر فعال شد'
+  end
+end
+
 local function lock_group_fwd(msg, data, target)
   if not is_momod(msg) then
     return
@@ -2202,7 +2229,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				text = "<b>Your NAME:</b> " ..string.gsub(msg.from.print_name, "_", " ").. "\n<b>Your ID:</b> "..msg.from.id.."\n<b>SuperGroup NAME:</b> " ..string.gsub(msg.to.print_name, "_", " ").. "\n<b>SuperGroup ID:</b> "..msg.to.id
+				text = "Your NAME: " ..string.gsub(msg.from.print_name, "_", " ").. "\nYour ID: "..msg.from.id.."\nSuperGroup NAME: " ..string.gsub(msg.to.print_name, "_", " ").. "\nSuperGroup ID: "..msg.to.id
 	reply_msg(msg.id, text, ok_cb, false)
 end
 		end
