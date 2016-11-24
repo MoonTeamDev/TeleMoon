@@ -16,7 +16,8 @@ local function run(msg, matches)
 📝Rank: Sudo, DeveLopeR, Founder, Manager
         ]]
         return text
-    else  if not is_sudo(msg) then
+    else
+  if not is_sudo(msg) then
           return "You're not in Moon Team"
 
 
