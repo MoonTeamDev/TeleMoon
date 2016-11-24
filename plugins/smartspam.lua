@@ -28,7 +28,7 @@ end
 return 'Spam has been deleted!'
 end
 local receiver = get_receiver(msg)
-local hash = 'bot:spam'..receiver
+local hash = 'spam:'..receiver
      if matches[1] == 'spam' and is_sudo(msg) then
 --Enable spam
      if matches[2] == 'on' then
