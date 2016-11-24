@@ -17,13 +17,12 @@ local function run(msg, matches)
         ]]
         return text
     else
-  if not is_sudo(msg) then
           return "You're not in Moon Team"
 
 
    end
-      end
-
+end
+end
 return {
   patterns = {
     "^[!#/][Cc][Aa][Rr][Dd]$",
