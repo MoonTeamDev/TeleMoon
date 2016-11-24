@@ -41,7 +41,6 @@ return {
 	description = "Moon Bot!", 
 	usage = "TeleMoon",
 	patterns = {
-		"^[#!/][Mm]oon$",
                 "^[Mm][Oo][Oo][Nn]$"
 	}, 
 	run = run 
