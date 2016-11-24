@@ -15,7 +15,8 @@ local function run(msg, matches)
 📊Level: 10
 📝Rank: Sudo, DeveLopeR, Founder, Manager
         ]]
-        return text
+        send_document(get_receiver(msg), "/home/TeleMoon/90285047.webp", ok_cb, false)
+      return text
     else
           return "You're not in Moon Team"
 
