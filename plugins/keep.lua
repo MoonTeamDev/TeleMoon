@@ -5,7 +5,7 @@
    local text4 = matches[4]
   local text5 = matches[5]
  local text6 = matches[6]
-      local url = "http://api.roonx.com/photo/keepcalm.php?text="..text1.."&color="..text2.."&fontbg="..text3.."&fontsize="..text4.."&fontsize2="..text5.."&taj="..text6
+      local url = "http://api.roonx.com/photo/keepcalm.php?text="..text1.."&color="..text2.."&fontbg="..text3.."&fontsize="..text4.."&fontsize2="..text5.."&taj=%EE%BB%AA
        local  file = download_to_file(url,'emoji.webp') 
          send_document(get_receiver(msg), file, ok_cb, false) 
 
