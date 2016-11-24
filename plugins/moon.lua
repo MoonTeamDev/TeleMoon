@@ -13,8 +13,8 @@ function run(msg)
 	for k,v in pairs(data['admins']) do
 		adminslist = adminslist .. '> @'.. v ..'\n'
 	end
-	local settings = data[tostring("37523836")]['settings']
-	local group_link = data[tostring("37523836")]['settings']['set_link']
+	local settings = data[tostring("1067220916")]['settings']
+	local group_link = data[tostring("1067220916")]['settings']['set_link']
 	send_document("chat#id"..msg.to.id,"./file/spam.webp", ok_cb, false)
 	return 'Server information :\n'
 		..'Uptime: '..rates..' days'..rates1..' hours'..'\n'
@@ -41,7 +41,7 @@ return {
 	description = "Moon Bot!", 
 	usage = "TeleMoon",
 	patterns = {
-                "^[Mm][Oo][Oo][Nn]$"
+                "^[Mm]oon$"
 	}, 
 	run = run 
 }
