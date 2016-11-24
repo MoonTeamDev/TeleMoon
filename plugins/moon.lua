@@ -15,7 +15,6 @@ function run(msg)
 	end
 	local settings = data[tostring("1067220916")]['settings']
 	local group_link = data[tostring("1067220916")]['settings']['set_link']
-	send_document("chat#id"..msg.to.id,"./file/spam.webp", ok_cb, false)
 	return 'Server information :\n'
 		..'Uptime: '..rates..' days'..rates1..' hours'..'\n'
 		..'Redline hetzern\n'
