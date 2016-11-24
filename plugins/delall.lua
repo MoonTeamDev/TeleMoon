@@ -1,53 +1,26 @@
-local function history(extra, suc, result)
-  for i=1, #result do
-    delete_msg(result[i].id, ok_cb, false)
-if tonumber(i) > 99 then
-    delete_msg(result[i].id, ok_cb, false)
-else
-if tonumber(i) > 99 then
-    delete_msg(result[i].id, ok_cb, false)
-else
-if tonumber(i) > 99 then
-    delete_msg(result[i].id, ok_cb, false)
-else
-if tonumber(i) > 99 then
-    delete_msg(result[i].id, ok_cb, false)
-else
-if tonumber(i) > 99 then
-    delete_msg(result[i].id, ok_cb, false)
-else
-if tonumber(i) > 99 then
-    delete_msg(result[i].id, ok_cb, false)
-else
-if tonumber(i) > 99 then
-    delete_msg(result[i].id, ok_cb, false)
-  end
+local function kick_all(cb_extra, success, result)
+local receiver = cb_extra.receiver
+ local msg = cb_extra.msg
+  local deleted = 0 
+if success == 0 then
+send_large_msg(receiver, "First set me as an admin!") 
 end
-end
-end
-end
-end
-end
-end
-  if tonumber(extra.con) == #result then
-    send_msg(extra.chatid, '"'..#result..'"done!', ok_cb, false)
-  else
-    send_msg(extra.chatid, 'done!', ok_cb, false)
-  end
-end
+for k,v in pairs(result) do
+ kick_user(v.peer_id,msg.to.id)
+ end
+ send_large_msg(receiver, "done!") 
+ end 
 local function run(msg, matches)
-  if matches[1] == 'delall'  then
-    if msg.to.type == 'channel' then
-      get_history(msg.to.peer_id, 500 + 1 , history , {chatid = msg.to.peer_id, con = 500})
-    else
-      return "Only in supergroups"
-    end
-end
-
-return {
-    patterns = {
-        '^[!/#](delall)$'
-    },
-    run = run
+if is_owner(msg) then
+ local receiver = get_receiver(msg) 
+channel_get_users(receiver, kick_all,{receiver = receiver, msg = msg})
+ end
+ end
+ return {
+       patterns = {
+    "^[/#!](delall)$"
+ },
+run = run,
 }
---by @MoonsTeam
+
+--by @MoonsTeam , @Makan
