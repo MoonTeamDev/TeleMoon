@@ -1,6 +1,6 @@
 local datebase = {
-  "<b>Pong!</b>😐",
-  "<i>Pong!</i>😒",
+  "<b>Pong!</b>",
+  "<i>Pong!</i>",
   "<code>Pong!</code>",
   }
 local function run(msg, matches)
@@ -9,7 +9,6 @@ end
 return {
   patterns = {
     "^[!#/]([Pp][Ii][Nn][Gg])$",
-    "^([Pp][Ii][Nn][Gg])$",
   },
   run = run
 }
