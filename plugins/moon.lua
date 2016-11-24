@@ -1,32 +1,49 @@
 do
-local function admin_list(msg)
-    local data = load_data(_config.moderation.data)
-        local admins = 'admins'
-        if not data[tostring(admins)] then
-        data[tostring(admins)] = {}
-        save_data(_config.moderation.data, data)
-        end
-        local message = 'Admins :\n'
-        for k,v in pairs(data[tostring(admins)]) do
-                message = message .. '> @' .. v .. ' [' .. k .. '] ' ..'\n'
-        end
-        return message
+
+function run(msg)
+	local uptime = io.popen('uptime'):read('*all')
+	local rates = uptime:split("up")
+	local rates1 = uptime:split(",")
+	local rates1 = rates1[2]
+	local rates = rates[2]
+	local rates = rates:split(",  load")
+	local rates = rates[1]
+	local data = load_data(_config.moderation.data)
+	local adminslist = ''
+	for k,v in pairs(data['admins']) do
+		adminslist = adminslist .. '> @'.. v ..'\n'
+	end
+	local settings = data[tostring("37523836")]['settings']
+	local group_link = data[tostring("37523836")]['settings']['set_link']
+	send_document("chat#id"..msg.to.id,"./file/spam.webp", ok_cb, false)
+	return 'Server information :\n'
+		..'Uptime: '..rates..' days'..rates1..' hours'..'\n'
+		..'Redline hetzern\n'
+		..'CPU : 2 Core\n'
+		..'RAM : 4 GB\n'
+		..'HDD : 2 x 4 TB\n'
+		..'IPN : 4 MB/S\n'
+		..'Port : 1 MB/s\n______________________________\n\n'
+		..'Group rates with @TeleMoon:\n'
+		..'Weekly = 2T\n'
+		..'Monthly = 3T\n'
+		..'Unlimited = 5T\n______________________________\n\n'
+		..'Developers:\n'
+		..'Sudo: @Makan\n'
+		..'Admins:\n'..adminslist..'______________________________\n\n'
+		..'Contact us:\n'
+		..'WebSite: www.MoonTeam.ir\n'
+		..'Channel: https://telegram.me/MoonsTeam\n'
+		..'Support:\n'..group_link
 end
-local function run(msg, matches)
-local uptime = io.popen('uptime'):read('*all')
-local admins = admin_list(msg)
-local data = load_data(_config.moderation.data)
-local group_link = data[tostring(144165355)]['settings']['set_link'] --put your support id here
-local space = '______________________________'
-if not group_link then
-return ''
-end
-return "مشحصات فنی سرور\n مدت آنلاین :"..uptime.."\nRedstation\nCPU : 2 Core\nRAM : 2 GB\nHDD : 2 x 4 TB\nIPN : 9 MB/S\nPort : 4 MB/s\n"..space.."\nنرخ گروه با ربات ضد اسپم moon:\n گروه وی آی پی = 5000 تومان\n"..space.."\n توسئه دهندگان :\nسازنده و صاحب امتیاز: #MAKAN\n"..admins.."\n"..space.."\nپلهای ارتباطی :\nکانال : https://telegram.me/MoonTeam\n لینک ساپورت :\n"..group_link
-end
+
 return {
-patterns = {
-"^[Mm]oon$",
-},
-run = run
+	description = "Moon Bot!", 
+	usage = "TeleMoon",
+	patterns = {
+		"^[#!/][Mm]oon$",
+                "^[Mm][Oo][Oo][Nn]$"
+	}, 
+	run = run 
 }
 end
