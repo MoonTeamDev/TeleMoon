@@ -26,9 +26,10 @@ local hash = 'kick:'..msg.to.id..':'..msg.from.id
 
 return {
   patterns = {
-  "^kickme$",
-  "^yes$",
-  "^no$"
+  "^[#!/]kickme$",
+  "^[Kk]ickme$",
+  "^[Yy]es$",
+  "^[Nn]o$"
   },
   run = run,
 }
