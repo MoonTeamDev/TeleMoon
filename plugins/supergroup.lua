@@ -22,6 +22,7 @@ local function check_member_super(cb_extra, success, result)
 		  lock_link = "no",
           flood = 'yes',
 		  lock_spam = 'yes',
+                  lock_username = 'no',
 		  lock_sticker = 'no',
 		  member = 'no',
 		  public = 'no',
