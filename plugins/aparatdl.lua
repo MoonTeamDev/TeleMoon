@@ -7,8 +7,6 @@ local function run(msg, matches)
 
   local file = download_to_file(url)
   local cb_extra = {file_path=file}
-  
-    send_video(receiver, file, rmtmp_cb, cb_extra)
 end  
 end
 return {
