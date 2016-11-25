@@ -1,14 +1,3 @@
---[[
-
-     **************************
-     *  BlackPlus Plugins...  *
-     *                        *
-     *     By @MehdiHS        *
-     *                        *
-     *  Channel > @Black_Ch   *
-     **************************
-	 
-]]
 --Begin supergrpup.lua
 --Check members #Add supergroup
 local function check_member_super(cb_extra, success, result)
@@ -43,9 +32,9 @@ local function check_member_super(cb_extra, success, result)
 		  lock_webpage = 'no',
 		  lock_fwd = 'no',
 		  lock_emoji = 'no',
-		  lock_eng = 'no',
+		  lock_english = 'no',
 		  strict = 'no',
-		  lock_badw = 'no'
+		  fosh = 'no'
         }
       }
       save_data(_config.moderation.data, data)
@@ -341,34 +330,6 @@ local function unlock_group_tag(msg, data, target)
     return reply_msg(msg.id,"> Tag has been #unlocked", ok_cb, false)
   end
 end
--- WebPage Fanction by MehdiHS!
-local function lock_group_webpage(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_webpage_lock = data[tostring(target)]['settings']['lock_webpage']
-  if group_webpage_lock == 'yes' then
-    return reply_msg(msg.id,"> #WebLink Posting is #already locked!", ok_cb, false)
-  else
-    data[tostring(target)]['settings']['lock_webpage'] = 'yes'
-    save_data(_config.moderation.data, data)
-    return reply_msg(msg.id,"> #WebLink posting has been #locked", ok_cb, false)
-  end
-end
-
-local function unlock_group_webpage(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_webpage_lock = data[tostring(target)]['settings']['lock_webpage']
-  if group_webpage_lock == 'no' then
-    return reply_msg(msg.id,"> #WebLink Posting is #already unlocked", ok_cb, false)
-  else
-    data[tostring(target)]['settings']['lock_webpage'] = 'no'
-    save_data(_config.moderation.data, data)
-    return reply_msg(msg.id,"> #WebLink posting has been #unlocked", ok_cb, false)
-  end
-end
 -- Anti Fwd Fanction by MehdiHS!
 local function lock_group_fwd(msg, data, target)
   if not is_momod(msg) then
@@ -454,29 +415,29 @@ local function unlock_group_emoji(msg, data, target)
   end
 end
 -- lock English Fanction by MehdiHS!
-local function lock_group_eng(msg, data, target)
+local function lock_group_english(msg, data, target)
   if not is_momod(msg) then
     return
   end
-  local group_eng_lock = data[tostring(target)]['settings']['lock_eng']
-  if group_eng_lock == 'yes' then
+  local group_eng_lock = data[tostring(target)]['settings']['lock_english']
+  if group_english_lock == 'yes' then
     return reply_msg(msg.id,"> #English is #already locked!", ok_cb, false)
   else
-    data[tostring(target)]['settings']['lock_eng'] = 'yes'
+    data[tostring(target)]['settings']['lock_english'] = 'yes'
     save_data(_config.moderation.data, data)
     return reply_msg(msg.id,"> #English Has been #locked!", ok_cb, false)
   end
 end
 
-local function unlock_group_eng(msg, data, target)
+local function unlock_group_english(msg, data, target)
   if not is_momod(msg) then
     return
   end
-  local group_eng_lock = data[tostring(target)]['settings']['lock_eng']
-  if group_eng_lock == 'no' then
+  local group_eng_lock = data[tostring(target)]['settings']['lock_english']
+  if group_english_lock == 'no' then
     return reply_msg(msg.id,"> #English is #already unlocked", ok_cb, false)
   else
-    data[tostring(target)]['settings']['lock_eng'] = 'no'
+    data[tostring(target)]['settings']['lock_english'] = 'no'
     save_data(_config.moderation.data, data)
     return reply_msg(msg.id,"> #English has been #unlocked", ok_cb, false)
   end
