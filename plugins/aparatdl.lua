@@ -9,7 +9,6 @@ local function run(msg, matches)
   local file = download_to_file(url)
   local cb_extra = {file_path=file}
   
-  local mime_type = mimetype.get_content_type_no_sub(ext)
     send_video(receiver, file, rmtmp_cb, cb_extra)
 end  
 end
