@@ -8,7 +8,7 @@ local function set_pass(msg, pass, id)
   local name = string.gsub(msg.to.print_name, '_', '')
   if hash then
     redis:hset(hash, pass, id)
-      return send_large_msg("channel#id"..msg.to.id, "🔱 Password of SuperGroup:\n["..name.."] has been set to:‌\n\n "..pass.."\n\nNow user can join in pm by\n!join "..pass.." ⚜", ok_cb, true)
+      return send_large_msg("channel#id"..msg.to.id, "ߔ᠐assword of group:\n["..name.."] has been set to:‌\n\n "..pass.."\n\nNow user can join in pm by\n!join "..pass.." ⚜", ok_cb, true)
   end
 end
 
@@ -18,9 +18,9 @@ local function is_used(pass)
   return used or false
 end
 local function show_add(cb_extra, success, result)
-  --vardump(result)
+  vardump(result)
     local receiver = cb_extra.receiver
-    local text = "I added you to👥 "..result.title.."(👤"..result.participants_count..")"
+    local text = "I added you toߑ堢"..result.title.."(ߑ䢮.result.participants_count..)"
     send_large_msg(receiver, text)
 end
 local function added(msg, target)
@@ -45,17 +45,17 @@ local function run(msg, matches)
     if not id then
       return "Could not find a group with this pass\nMaby the pass has been changed"
     end
-    channel_invite_user("channel#id"..id, "user#id"..msg.from.id, ok_cb, false)
-    return added(msg, id)
+    chat_add_user("channel#id"..id, "user#id"..msg.from.id, ok_cb, false) 
+  return added(msg, id)
   else
-	return "I could not added you to"..string.gsub(msg.to.id.print_name, '_', '')
+  return "I could not added you to"..string.gsub(msg.to.id.print_name, '_', ' ')
   end
   if matches[1] == "pass" then
    local hash = 'setpass:'
-   local channel_id = msg.to.id
+   local chat_id = msg.to.id
    local pass = redis:hget(hash, channel_id)
    local receiver = get_receiver(msg)
-   send_large_msg(receiver, "Password for SuperGroup:["..msg.to.print_name.."]\n\nPass > "..pass)
+   send_large_msg(receiver, "Password for Group:["..msg.to.print_name.."]\n\nPass > "..pass)
  end
 end
 
@@ -63,9 +63,14 @@ return {
   patterns = {
     "^[/!#](setpass) (.*)$",
     "^[/!#](pass)$",
-    "^[/!#](join) (.*)$"
+    "^[/!#](join) (.*)$",
+	"^!!tgservice (chat_add_user)$",
+	"^!!tgservice (.+)$",
+    "^!!tgservice (chat_del_user)$"
+
   },
   run = run
 }
-
 end
+
+--by @MoonsTeam , @Makan
