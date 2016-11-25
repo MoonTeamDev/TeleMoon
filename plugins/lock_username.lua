@@ -6,7 +6,7 @@ local function run(msg, matches)
     if data[tostring(msg.to.id)] then
         if data[tostring(msg.to.id)]['settings'] then
             if data[tostring(msg.to.id)]['settings']['lock_username'] then
-                username = data[tostring(msg.to.id)]['settings']['lock_username']
+                username = data[tostring(msg.to.id)]['settings']['username']
             end
         end
     end
