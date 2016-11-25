@@ -426,7 +426,7 @@ local function lock_group_forword(msg, data, target)
   end
  end
 end
-local function unlock_group_fwd(msg, data, target)
+local function unlock_group_forword(msg, data, target)
   if not is_momod(msg) then
     return
   end
