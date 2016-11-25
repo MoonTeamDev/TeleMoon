@@ -22,6 +22,7 @@ local function check_member_super(cb_extra, success, result)
 		  lock_link = "no",
           flood = 'yes',
 		  lock_spam = 'yes',
+                  lock_bots = 'yes',
 		  lock_sticker = 'no',
 		  member = 'no',
 		  public = 'no',
@@ -349,6 +350,57 @@ local function unlock_group_flood(msg, data, target)
   end
  end
 end
+
+local function lock_group_bots(msg, data, target)
+  if not is_momod(msg) then
+    return 
+  end
+  local group_bots_lock = data[tostring(target)]['settings']['lock_bots']
+  if group_bots_lock == 'yes' then
+  local hash = 'group:'..msg.to.id
+  local group_lang = redis:hget(hash,'lang')
+  if group_lang then
+    return '<i>قفل ورود ربات ها فعال بود</i>'
+  else
+  return '<b>Bots protection is already enabled</b>'
+  end
+  end
+    data[tostring(target)]['settings']['lock_bots'] = 'yes'
+    save_data(_config.moderation.data, data)
+    local hash = 'group:'..msg.to.id
+  local group_lang = redis:hget(hash,'lang')
+  if group_lang then
+    return '<i>قفل ورود ربات ها فعال شد</i>'
+    else
+    return '<b>Bots protection has been enabled</b>'
+  end
+end
+
+local function unlock_group_bots(msg, data, target)
+  if not is_momod(msg) then
+    return 
+  end
+  local group_bots_lock = data[tostring(target)]['settings']['lock_bots']
+  if group_bots_lock == 'no' then
+  local hash = 'group:'..msg.to.id
+  local group_lang = redis:hget(hash,'lang')
+  if group_lang then
+    return '<i>قفل ورود ربات ها غیر فعال بود</i>'
+  else
+  return '<b>Bots protection is already disabled</b>'
+  end
+  end
+    data[tostring(target)]['settings']['lock_bots'] = 'no'
+    save_data(_config.moderation.data, data)
+    local hash = 'group:'..msg.to.id
+  local group_lang = redis:hget(hash,'lang')
+  if group_lang then
+    return '<i>قفل ورود ربات ها غیر فعال شد</i>'
+    else
+    return '<b>Bots protection has been disabled</b>'
+  end
+end
+end
 local function lock_group_forword(msg, data, target)
   if not is_momod(msg) then
     return
@@ -374,7 +426,7 @@ local function lock_group_forword(msg, data, target)
   end
  end
 end
-local function unlock_group_forword(msg, data, target)
+local function unlock_group_fwd(msg, data, target)
   if not is_momod(msg) then
     return
   end
@@ -938,6 +990,11 @@ if data[tostring(target)]['settings'] then
 		end
 	end
 if data[tostring(target)]['settings'] then
+    if not data[tostring(target)]['settings']['lock_bots'] then
+      data[tostring(target)]['settings']['lock_bots'] = 'yes'
+    end
+  end
+if data[tostring(target)]['settings'] then
     if not data[tostring(target)]['settings']['lock_fwd'] then
       data[tostring(target)]['settings']['lock_fwd'] = 'no'
     end
@@ -981,12 +1038,12 @@ if is_muted(tostring(target), 'Audio: yes') then
   local hash = 'group:'..msg.to.id
   local group_lang = redis:hget(hash,'lang')
   if group_lang then
-  local textfa = "<i>تنظیمات سوپرگروه</i>\n<i># قفل لینک</i> : <code>"..settings.lock_link.."</code>\n<i># قفل فلود</i> : <code>"..settings.flood.."</code>\n<i># قفل فوروارد</i> : <code>"..settings.lock_fwd.."</code>\n<i># قفل یوزرنیم</i> : <code>"..settings.lock_username.."</code>\n<i># حساسیت</i> : <code>"..NUM_MSG_MAX.."</code>\n<i># قفل اسپم</i> : <code>"..settings.lock_spam.."</code>\n<i># قفل عربی</i> : <code>"..settings.lock_arabic.."</code>\n<i># قفل اعضا</i> : <code>"..settings.lock_member.."</code>\n<i># قفل کارکتر</i> : <code>"..settings.lock_rtl.."</code>\n<i># قفل رفت و امد</i>: <code>"..settings.lock_tgservice.."</code>\n<i># قفل استیکر</i> : <code>"..settings.lock_sticker.."</code>\n<i># تنظیمات عمومی</i> : <code>"..settings.public.."</code>\n<i># سخت گیرانه</i> : <code>"..settings.strict.."</code>\n--------------------------------\n<i># لیست فیلتر</i>:\n<i># فیلتر وویس</i> : <code>"..Audio.."</code>\n<i># فیلتر عکس</i> : <code>"..Photo.."</code>\n<i># فیلتر ویدیو</i> : <code>"..Video.."</code>\n<i># فیلتر گیف</i> : <code>"..Gifs.."</code>\n<i># فیلتر اسناد</i> : <code>"..Documents.."</code>\n<i># فیلتر تکست</i> : <code>"..Text.."</code>\n<i># فیلتر گروه</i> : <code>"..All.."</code>\n<code>زبان:فارسی</code>"
+  local textfa = "<i>تنظیمات سوپرگروه</i>\n<i># قفل لینک</i> : <code>"..settings.lock_link.."</code>\n<i># قفل فلود</i> : <code>"..settings.flood.."</code>\n<i># قفل فوروارد</i> : <code>"..settings.lock_fwd.."</code>\n<i># قفل ربات ها:</i> <code>"..lock_bots.."</code>\n<i># قفل یوزرنیم</i> : <code>"..settings.lock_username.."</code>\n<i># حساسیت</i> : <code>"..NUM_MSG_MAX.."</code>\n<i># قفل اسپم</i> : <code>"..settings.lock_spam.."</code>\n<i># قفل عربی</i> : <code>"..settings.lock_arabic.."</code>\n<i># قفل اعضا</i> : <code>"..settings.lock_member.."</code>\n<i># قفل کارکتر</i> : <code>"..settings.lock_rtl.."</code>\n<i># قفل رفت و امد</i>: <code>"..settings.lock_tgservice.."</code>\n<i># قفل استیکر</i> : <code>"..settings.lock_sticker.."</code>\n<i># تنظیمات عمومی</i> : <code>"..settings.public.."</code>\n<i># سخت گیرانه</i> : <code>"..settings.strict.."</code>\n--------------------------------\n<i># لیست فیلتر</i>:\n<i># فیلتر وویس</i> : <code>"..Audio.."</code>\n<i># فیلتر عکس</i> : <code>"..Photo.."</code>\n<i># فیلتر ویدیو</i> : <code>"..Video.."</code>\n<i># فیلتر گیف</i> : <code>"..Gifs.."</code>\n<i># فیلتر اسناد</i> : <code>"..Documents.."</code>\n<i># فیلتر تکست</i> : <code>"..Text.."</code>\n<i># فیلتر گروه</i> : <code>"..All.."</code>\n<code>زبان:فارسی</code>"
   textfa = string.gsub(textfa, 'no', 'خیر')
   textfa = string.gsub(textfa, 'yes', 'بله')
   return textfa
   else
-  local text = "<i>SuperGroup settings</i> :\n<b># Lock links</b> : <code>"..settings.lock_link.."</code>\n<b># Lock flood</b> : <code>"..settings.flood.."</code>\n<b># Lock fwd</b>: <code>"..settings.lock_fwd.."</code>\n<b># Lock Username</b> : <code>"..settings.lock_username.."</code>\n<b># Flood sensitivity</b> : <code>"..NUM_MSG_MAX.."</code>\n<b># Lock spam</b> : <code>"..settings.lock_spam.."</code>\n<b># Lock Arabic</b> : <code>"..settings.lock_arabic.."</code>\n<b># Lock Member</b> : <code>"..settings.lock_member.."</code>\n<b># Lock RTL</b> : <code>"..settings.lock_rtl.."</code>\n<b># Lock Tgservice</b> : <code>"..settings.lock_tgservice.."</code>\n<b># Lock sticker</b> : <code>"..settings.lock_sticker.."</code>\n<b># Public</b> : <code>"..settings.public.."</code>\n<b># Strict settings</b> : <code>"..settings.strict.."</code>\n---------------------------\n<i># Mute List</i>:\n<b># Mute Audio</b> : <code>"..Audio.."</code>\n<b># Mute photo</b> : <code>"..Photo.."</code>\n<b># Mute video</b> : <code>"..Video.."</code>\n<b># Mute Gifs</b> : <code>"..Gifs.."</code>\n<b># Mute Documents</b> : <code>"..Documents.."</code>\n<b># Mute Text</b> : <code>"..Text.."</code>\n<b># Mute All</b> : <code>"..All.."</code>\n<i>lang:EN</i>"
+  local text = "<i>SuperGroup settings</i> :\n<b># Lock links</b> : <code>"..settings.lock_link.."</code>\n<b># Lock flood</b> : <code>"..settings.flood.."</code>\n<b># Lock fwd</b>: <code>"..settings.lock_fwd.."</code>\n<b># Lock bots:</b> <code>"..lock_bots.."</code>\n<b># Lock Username</b> : <code>"..settings.lock_username.."</code>\n<b># Flood sensitivity</b> : <code>"..NUM_MSG_MAX.."</code>\n<b># Lock spam</b> : <code>"..settings.lock_spam.."</code>\n<b># Lock Arabic</b> : <code>"..settings.lock_arabic.."</code>\n<b># Lock Member</b> : <code>"..settings.lock_member.."</code>\n<b># Lock RTL</b> : <code>"..settings.lock_rtl.."</code>\n<b># Lock Tgservice</b> : <code>"..settings.lock_tgservice.."</code>\n<b># Lock sticker</b> : <code>"..settings.lock_sticker.."</code>\n<b># Public</b> : <code>"..settings.public.."</code>\n<b># Strict settings</b> : <code>"..settings.strict.."</code>\n---------------------------\n<i># Mute List</i>:\n<b># Mute Audio</b> : <code>"..Audio.."</code>\n<b># Mute photo</b> : <code>"..Photo.."</code>\n<b># Mute video</b> : <code>"..Video.."</code>\n<b># Mute Gifs</b> : <code>"..Gifs.."</code>\n<b># Mute Documents</b> : <code>"..Documents.."</code>\n<b># Mute Text</b> : <code>"..Text.."</code>\n<b># Mute All</b> : <code>"..All.."</code>\n<i>lang:EN</i>"
   return text
  end
 end
@@ -2266,11 +2323,15 @@ end
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked flood ")
 				return lock_group_flood(msg, data, target)
 			end
-if matches[2] == 'fwd' then
-				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked Forword posting ")
+                        if matches[2] == 'bots' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked bots")
+				return lock_group_bots(msg, data, target)
+			end
+                        if matches[2] == 'fwd' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked Forword posting")
 				return lock_group_forword(msg, data, target)
 			end
-if matches[2] == 'username' then
+                        if matches[2] == 'username' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked username")
 				return lock_group_username(msg, data, target)
 			end
@@ -2318,11 +2379,15 @@ if matches[2] == 'username' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked flood")
 				return unlock_group_flood(msg, data, target)
 			end
-if matches[2] == 'fwd' then
+                        if matches[2] == 'bots' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked bots")
+				return unlock_group_bots(msg, data, target)
+			end
+                        if matches[2] == 'fwd' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked Forword posting")
 				return unlock_group_forword(msg, data, target)
 			end
-if matches[2] == 'username' then
+                        if matches[2] == 'username' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked username")
 				return unlock_group_username(msg, data, target)
 			end
@@ -2672,13 +2737,12 @@ return {
 	"^[#!/]([Bb]ots)$",
 	"^[#!/]([Ww]ho)$",
 	"^[#!/]([Kk]icked)$",
- "^[#!/]([Kk]ick) (.*)",
+        "^[#!/]([Kk]ick) (.*)",
 	"^[#!/]([Bb]lock)",
 	"^[#!/]([Tt]osuper)$",
 	"^[#!/]([Ii][Dd])$",
 	"^[#!/]([Ii][Dd]) (.*)$",
 	"^[#!/]([Kk]ickme)$",
-	"^[#!/]([Kk]ick) (.*)$",
 	"^[#!/]([Nn]ewlink)$",
 	"^[#!/]([Ss]etlink)$",
 	"^[#!/]([Ll]ink)$",
@@ -2730,8 +2794,7 @@ return {
 	"^([Tt]osuper)$",
 	"^([Ii][Dd])$",
 	"^([Ii][Dd]) (.*)$",
-	--"^([Kk]ickme)$",
-	--"^([Kk]ick) (k)$",
+	"^([Kk]ickme)$",
 	"^([Ll]ink)$",
 	"^([Rr]es) (.*)$",
 	"^([Ss]etadmin) (.*)$",
