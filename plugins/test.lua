@@ -690,23 +690,18 @@ function show_supergroup_settingsmod(msg, target)
 		end
 end
 	if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_webpage'] then
-			data[tostring(target)]['settings']['lock_webpage'] = 'no'
-		end
-end
-	if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['lock_emoji'] then
 			data[tostring(target)]['settings']['lock_emoji'] = 'no'
 		end
 end
 	if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_eng'] then
-			data[tostring(target)]['settings']['lock_eng'] = 'no'
+		if not data[tostring(target)]['settings']['lock_english'] then
+			data[tostring(target)]['settings']['lock_english'] = 'no'
 		end
 end
 	if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_badw'] then
-			data[tostring(target)]['settings']['lock_badw'] = 'no'
+		if not data[tostring(target)]['settings']['fosh'] then
+			data[tostring(target)]['settings']['fosh'] = 'no'
 		end
 end
 	if data[tostring(target)]['settings'] then
@@ -750,7 +745,7 @@ end
 		end
 	end
   local settings = data[tostring(target)]['settings']
-  local text = "SuperGroup settings:\n\nLock Links > "..settings.lock_link.."\nLock Webpage > "..settings.lock_webpage.."\nLock Tag > "..settings.lock_tag.."\nLock Emoji > "..settings.lock_emoji.."\nLock English > "..settings.lock_eng.."\nLock Badword > "..settings.lock_badw.."\nLock Flood > "..settings.flood.."\nFlood sensitivity > "..NUM_MSG_MAX.."\nLock Spam > "..settings.lock_spam.."\nLock Contacts > "..settings.lock_contacts.."\nLock Arabic/Persian > "..settings.lock_arabic.."\nLock Member > "..settings.lock_member.."\nLock RTL > "..settings.lock_rtl.."\nLock Forward > "..settings.lock_fwd.."\nLock TGservice > "..settings.lock_tgservice.."\nLock Sticker > "..settings.lock_sticker.."\nPublic > "..settings.public.."\nStrict Settings > "..settings.strict
+  local text = "SuperGroup settings:\n\nLock Links > "..settings.lock_link.."\nLock Tag > "..settings.lock_tag.."\nLock Emoji > "..settings.lock_emoji.."\nLock English > "..settings.lock_eng.."\nLock Fosh > "..settings.fosh.."\nLock Flood > "..settings.flood.."\nFlood sensitivity > "..NUM_MSG_MAX.."\nLock Spam > "..settings.lock_spam.."\nLock Contacts > "..settings.lock_contacts.."\nLock Arabic/Persian > "..settings.lock_arabic.."\nLock Member > "..settings.lock_member.."\nLock RTL > "..settings.lock_rtl.."\nLock Fwd > "..settings.lock_fwd.."\nLock TGservice > "..settings.lock_tgservice.."\nLock Sticker > "..settings.lock_sticker.."\nPublic > "..settings.public.."\nStrict Settings > "..settings.strict
   reply_msg(msg.id, text, ok_cb, false)
 end
 
@@ -1871,17 +1866,13 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked Tag ")
 				return lock_group_tag(msg, data, target)
 			end
-			if matches[2] == 'webpage' then
-				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked WebLink ")
-				return lock_group_webpage(msg, data, target)
-			end
-			if matches[2] == 'forward' then
+			if matches[2] == 'fwd' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked Forward Msg ")
 				return lock_group_fwd(msg, data, target)
 			end
-			if matches[2] == 'badword' then
+			if matches[2] == 'fosh' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked Badwords ")
-				return lock_group_badw(msg, data, target)
+				return lock_group_fosh(msg, data, target)
 			end
 			if matches[2] == 'emoji' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked Emoji ")
@@ -1889,7 +1880,7 @@ local function run(msg, matches)
 			end
 			if matches[2] == 'english' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked English ")
-				return lock_group_eng(msg, data, target)
+				return lock_group_english(msg, data, target)
 			end
 			if matches[2] == 'member' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked member ")
@@ -1961,25 +1952,21 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked Tag")
 				return unlock_group_tag(msg, data, target)
 			end
-			if matches[2] == 'webpage' then
-				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked WebLink")
-				return unlock_group_webpage(msg, data, target)
-			end
 			if matches[2] == 'emoji' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked Emoji")
 				return unlock_group_emoji(msg, data, target)
 			end
 			if matches[2] == 'english' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked English")
-				return unlock_group_eng(msg, data, target)
+				return unlock_group_english(msg, data, target)
 			end
-			if matches[2] == 'forward' then
+			if matches[2] == 'fwd' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked Forward Msg")
 				return unlock_group_fwd(msg, data, target)
 			end
-			if matches[2] == 'badword' then
+			if matches[2] == 'fosh' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked Badwords")
-				return unlock_group_badw(msg, data, target)
+				return unlock_group_fosh(msg, data, target)
 			end
 			if matches[2] == 'photo' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked photo")
@@ -2385,7 +2372,7 @@ return {
 	"^[#!/]([Rr]ules)$",
 	"^[#!/]([Ss]etflood) (%d+)$",
 	"^[#!/]([Cc]lean) (.*)$",
-	"^[#!/]([Hh]elp)$",
+	--"^[#!/]([Hh]elp)$",
 	"^[#!/]([Mm]uteslist)$",
 	"^[#!/]([Mm]utelist)$",
 	"^([Aa]dd)$",
@@ -2437,7 +2424,7 @@ return {
 	"^([Rr]ules)$",
 	"^([Ss]etflood) (%d+)$",
 	"^([Cc]lean) (.*)$",
-	"^([Hh]elp)$",
+	--"^([Hh]elp)$",
 	"^([Mm]uteslist)$",
 	"^([Mm]utelist)$",
     "([Hh][Tt][Tt][Pp][Ss]://[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]/[Jj][Oo][Ii][Nn][Cc][Hh][Aa][Tt]/%S+)",
@@ -2452,14 +2439,3 @@ return {
   run = run,
   pre_process = pre_process
 }
---[[
-
-     **************************
-     *  BlackPlus Plugins...  *
-     *                        *
-     *     By @MehdiHS        *
-     *                        *
-     *  Channel > @Black_Ch   *
-     **************************
-	 
-]]
