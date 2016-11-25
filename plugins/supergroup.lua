@@ -1046,7 +1046,7 @@ function show_supergroup_settingsmod(msg, target)
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "SuperGroup settings:\n➖➖➖➖➖➖➖➖\nLock links : "..settings.lock_link.."\nLock contacts: "..settings.lock_contacts.."\nLock flood: "..settings.flood.."\nFlood sensitivity : "..NUM_MSG_MAX.."\nLock spam: "..settings.lock_spam.."\nLock Arabic: "..settings.lock_arabic.."\nLock Member: "..settings.lock_member.."\nLock RTL: "..settings.lock_rtl.."\nLock Tgservice: "..settings.lock_tgservice.."\nLock sticker: "..settings.lock_sticker.."\nLock emoji: "..settings.emoji.."\nLock fwd(forward): "..settings.fwd.."\nLock reply: "..settings.reply.."\nLock join: "..settings.join.."\nLock username(@): "..settings.username.."\nLock media: "..settings.media.."\nLock fosh: "..settings.fosh.."\nLock leave: "..settings.leave.."\nLock bots: "..bots_protection.."\nLock operator: "..settings.operator.."\n➖➖➖➖➖➖➖➖\nEasy Sweet&Faster Switch:️\n➖➖➖➖➖➖➖➖\nSwitch Model Etehad: "..settings.etehad.."\nLock all: "..settings.all.."\n➖➖➖➖➖➖➖➖\nAbout Group️:️\n➖➖➖➖➖➖➖➖\nGroup type: "..gp_type.."\nPublic: "..settings.public.."\nStrict settings: "..settings.strict.."\nExpire: "..expire.."\n➖➖➖➖➖➖➖➖\nTeleMoon V5️\n@MoonsTeam"
+  local text = "SuperGroup settings:\n➖➖➖➖➖➖➖➖\nLock links : "..settings.lock_link.."\nLock contacts: "..settings.lock_contacts.."\nLock flood: "..settings.flood.."\nFlood sensitivity : "..NUM_MSG_MAX.."\nLock spam: "..settings.lock_spam.."\nLock Arabic: "..settings.lock_arabic.."\nLock Member: "..settings.lock_member.."\nLock RTL: "..settings.lock_rtl.."\nLock Tgservice: "..settings.lock_tgservice.."\nLock sticker: "..settings.lock_sticker.."\nLock emoji: "..settings.emoji.."\nLock fwd(forward): "..settings.fwd.."\nLock reply: "..settings.reply.."\nLock join: "..settings.join.."\nLock username(@): "..settings.username.."\nLock media: "..settings.media.."\nLock fosh: "..settings.fosh.."\nLock leave: "..settings.leave.."\nLock bots: "..bots_protection.."\nLock operator: "..settings.operator.."\n<i># Mute List</i>:\n<b># Mute Audio</b> : <code>"..Audio.."</code>\n<b># Mute photo</b> : <code>"..Photo.."</code>\n<b># Mute video</b> : <code>"..Video.."</code>\n<b># Mute Gifs</b> : <code>"..Gifs.."</code>\n<b># Mute Documents</b> : <code>"..Documents.."</code>\n<b># Mute Text</b> : <code>"..Text.."</code>\n<b># Mute All</b> : <code>"..All.."</code>\n<i>lang:EN</i>"\n➖➖➖➖➖➖➖➖\nEasy Sweet&Faster Switch:️\n➖➖➖➖➖➖➖➖\nSwitch Model Etehad: "..settings.etehad.."\nLock all: "..settings.all.."\n➖➖➖➖➖➖➖➖\nAbout Group️:️\n➖➖➖➖➖➖➖➖\nGroup type: "..gp_type.."\nPublic: "..settings.public.."\nStrict settings: "..settings.strict.."\n➖➖➖➖➖➖➖➖\nTeleMoon V5️\n@MoonsTeam"
   return text
 end
 
@@ -2672,7 +2672,7 @@ end
 		end
 
 		if matches[1] == 'help' and not is_momod(msg) then
-			text = "Owners only!"
+			text = "Message /superhelp  in private for SuperGroup help"
 			reply_msg(msg.id, text, ok_cb, false)
 		elseif matches[1] == 'help' and is_momod(msg) then
 			local name_log = user_print_name(msg.from)
