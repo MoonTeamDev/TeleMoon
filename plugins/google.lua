@@ -31,7 +31,7 @@ return {
   description = "Searche in Google",
   usage = "src (item) : جستجوي گوگل",
   patterns = {
-    "^[Ss]rc (.*)$",
+    "^]#!/[[Ss]rc (.*)$",
     "^%.[s|S]rc (.*)$"
   },
   run = run
