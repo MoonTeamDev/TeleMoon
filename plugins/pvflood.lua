@@ -1,4 +1,4 @@
-local admin = 90285047,
+local admin = 90285047
 
 function run(msg, matches)
 local hash = 'PvSensitivy'..msg.from.id
