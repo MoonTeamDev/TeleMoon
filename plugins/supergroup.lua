@@ -1769,7 +1769,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				return " ..string.gsub(msg.to.print_name, "_", " ").. ": "..msg.to.id
+				return ">" ..string.gsub(msg.to.print_name, "_", " ").. ": "..msg.to.id
 			end
 		end
 		if matches[1] == 'kickme' then
