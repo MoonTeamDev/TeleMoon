@@ -1770,7 +1770,6 @@ local function run(msg, matches)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
 				return "Your NAME: " ..string.gsub(msg.from.print_name, "_", " ").. "\nYour ID: "..msg.from.id.."\nSuperGroup NAME: " ..string.gsub(msg.to.print_name, "_", " ").. "\nSuperGroup ID: "..msg.to.id
-	reply_msg(msg.id, text, ok_cb, false)
 			end
 		end
 
