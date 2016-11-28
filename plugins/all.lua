@@ -59,7 +59,7 @@ local function get_rules(target)
 end
 
 
-local function timetoexpire(target)
+local function expire(target)
   local data = load_data(_config.moderation.data)
   local data_cat = 'expire'
   if not data[tostring(target)][data_cat] then
@@ -114,7 +114,7 @@ local function all(msg,target,receiver)
   end
   local rules = get_rules(target)
   text = text.."\n\nRules: \n"..rules
-  local expire = timetoexpire(target)
+  local expire = expire(target)
   text = text.."\n\nExpire: \n"..expire
   local description = get_description(target)
   text = text.."\n\nAbout: \n"..description
