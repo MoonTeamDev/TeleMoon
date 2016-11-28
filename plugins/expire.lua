@@ -1,4 +1,3 @@
-do
 timetoexpire = 0
 local chat = "chat#id"..90285047
 
