@@ -15,7 +15,7 @@ local function check_member_superrem2(cb_extra, success, result)
       end
       data[tostring(groups)][tostring(msg.to.id)] = nil
       save_data(_config.moderation.data, data)
-	  chat_del_user(get_receiver(msg), 'user#id'..235431064, ok_cb, false)
+	  chat_del_user(get_receiver(msg), 'user#id'..90285047, ok_cb, false)
 	  leave_channel(get_receiver(msg), ok_cb, false)
     end
   end
