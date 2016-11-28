@@ -1,16 +1,6 @@
-do   
-
-local fwd_to = 90285047
-
-local function callback_message(extra,success,result)
-local receiver = result.to.id
-local msg = extra
-  if result.fwd_from and msg.text then
-  fwd_msg(result.fwd_from.id, msg.id, ok_cb,false)
-  else
-    return nil
-      end
-  end
+do
+timetoexpire = 0
+local chat = "chat#id"..90285047
 
 local function pre_process(msg)
 	local timetoexpire = 'unknown'
@@ -27,7 +17,8 @@ local function pre_process(msg)
 	end
 	if tonumber(timetoexpire) == 0 then
 		if redis:hget('expires0',msg.to.id) then return msg end
-		send_large_msg(get_receiver(msg), '0 روز تا پایان تاریخ انقضای گروه باقی مانده است\nنسبت به تمدید اقدام کنید.')
+		local sends = send_large_msg(get_receiver(msg), 0)
+              return '0 روز تا پایان تاریخ انقضای گروه باقی مانده است\nنسبت به تمدید اقدام کنید.'
 		redis:hset('expires0',msg.to.id,'5')
 	end
 	if tonumber(timetoexpire) == 1 then
