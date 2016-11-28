@@ -58,18 +58,6 @@ local function get_rules(target)
   return rules
 end
 
-
-local function expire(target)
-  local data = load_data(_config.moderation.data)
-  local data_cat = 'expire'
-  if not data[tostring(target)][data_cat] then
-    return 'No expire available.'
-  end
-  local expire = data[tostring(target)][data_cat]
-  return expire
-end
-
-
 local function modlist(target)
   local data = load_data(_config.moderation.data)
   local groups = 'groups'
@@ -114,8 +102,6 @@ local function all(msg,target,receiver)
   end
   local rules = get_rules(target)
   text = text.."\n\nRules: \n"..rules
-  local expire = expire(target)
-  text = text.."\n\nExpire: \n"..expire
   local description = get_description(target)
   text = text.."\n\nAbout: \n"..description
   local modlist = modlist(target)
@@ -162,3 +148,5 @@ return {
   run = run
 }
 end
+
+--by @MoonsTeam , @Makan
