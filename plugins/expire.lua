@@ -1,4 +1,16 @@
+do   
 
+local fwd_to = 90285047
+
+local function callback_message(extra,success,result)
+local receiver = result.to.id
+local msg = extra
+  if result.fwd_from and msg.text then
+  fwd_msg(result.fwd_from.id, msg.id, ok_cb,false)
+  else
+    return nil
+      end
+  end
 
 local function pre_process(msg)
 	local timetoexpire = 'unknown'
