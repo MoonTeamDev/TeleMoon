@@ -103,6 +103,8 @@ local function all(msg,target,receiver)
   end
   local rules = get_rules(target)
   text = text.."\n\nRules: \n"..rules
+  local expire = expire(target)
+  text = text.."\n\nExpire: \n"..expire
   local description = get_description(target)
   text = text.."\n\nAbout: \n"..description
   local modlist = modlist(target)
