@@ -1,31 +1,28 @@
-local function run(msg, matches)
-local txt = "🇮🇷 درخواست گروه 7 روزه شما به تیم مدیریت ارسال شد \n 🇮🇷Your Id :"..msg.from.id.."\n🇮🇷Your username :"..msg.from.username.."\n🇮🇷You will be Mention by admin for your request ‼️"
-local txt2 = "🇮🇷 درخواست گروه 30 روزه شما به تیم مدیریت ارسال شد \n 🇮🇷Your Id :"..msg.from.id.."\n🇮🇷Your username :"..msg.from.username.."\n🇮🇷You will be Mention by admin for your request ‼️"
-local txt3 = "🇮🇷 درخواست گروه بی نهایت شما به تیم مدیریت ارسال شد \n 🇮🇷Your Id :"..msg.from.id.."\n🇮🇷Your username :"..msg.from.username.."\n🇮🇷You will be Mention by admin for your request ‼️"
-local chat = '90285047'
-local text = "درخواست گروه 7 روزه از طرف"..msg.from.username.."🇮🇷"
-local text2 = "درخواست گروه 30 روزه از طرف"..msg.from.username.."🇮🇷"
-local text3 = "درخواست گروه بی نهایت از طرف"..msg.from.username.."🇮🇷"
+do
 
-if matches[1] == "group" and matches[2] == "1" then
- send_large_msg(chat, text, ok_cb, false)
- return txt
- end
- if matches[1] == "group" and matches[2] == "2" then
- send_large_msg(chat, text2, ok_cb, false)
- return txt2
- end
- if matches[1] == "group" and matches[2] == "3" then
- send_large_msg(chat, text3, ok_cb, false)
- return txt3
- end
+ function run(msg, matches)
+ local ch = '90285047'..msg.to.id
+ local fuse = 'New SuperGroup Request!\n\nId : ' .. msg.from.id .. '\n\nName: ' .. msg.from.print_name ..'\n\nUsername: @' .. msg.from.username ..'\n\nMessage From: '..msg.to.id.. '\n\nThe Pm:\n' .. matches[1]
+ local fuses = '!printf user#id' .. msg.from.id
 
+
+   local text = matches[1]
+   local chat = "chat#id"..90285047
+
+  local sends = send_msg(chat, fuse, ok_cb, false)
+  return 'Request Is Sent!\nYour SuperGroup Is Waiting For Create!'
+
+ end
+ end
  return {
-     patterns = {
-  "^[!/#]([Gg]roup) (1)$",
-    "^[!/#]([Gg]roup) (2)$",
-     "^[!/#]([Gg]roup) (3)$",
+
+  description = "SuperGroup request",
+
+  usage = "",
+  patterns = {
+  "^[#!/]reqgp$"
+
   },
-    run = run
-    }
-    end
+  run = run
+ }
+--by @Makan
