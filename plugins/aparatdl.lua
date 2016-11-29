@@ -1,9 +1,9 @@
 do
       local sys_messages = {
-        downloading = "در حال دريافت ويدئو...",
-        uploading = "ويدئو شما در حال بارگذاري است...",
-  error = "خطا در دريافت ويدئو",
-  not_found ="ويدئو پيدا نشد",
+        downloading = "downloading...",
+        uploading = "Please wait...",
+  error = "Error! Please try again",
+  not_found = "Video not found",
   maxFilesize = 0,
       }
    local STATUS_ERROR =0
@@ -46,8 +46,8 @@ do
       end
         return {
         --description = "دانلود فيلم از سايت يوتيوب",
-  description = "دانلود فیلم از آپارات",
-        usage = "بصورت اتوماتیک لینک آپارات را تشخیص داده و فیلم را دانلود میکند",
+  description = "Aparat download",
+        usage = "Auto download aparat videos",
         patterns = {
           "[/#!][Aa]paratdl http://aparat.com/v/([_A-Za-z0-9-]+)/?"
         },
