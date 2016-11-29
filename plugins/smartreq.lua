@@ -1,37 +1,31 @@
 local function run(msg, matches)
-if matches[1] == 'group' then
-local hash = 'Group req:'..msg.from.id
-     redis:set(hash, "waite")
-      return '🔖کاربر عزیز ('..msg.from.username..')\nشما درخواست گروه ارسال کردید\nبرای گروه 7 روزه عدد 7\nبرای گروه 30 روزه عدد 30\nو برای گروه بدون مدت بی نهایت را ارسال کنید'
-    end
+local txt = "🇮🇷 درخواست گروه 7 روزه شما به تیم مدیریت ارسال شد \n 🇮🇷Your Id :"..msg.from.id.."\n🇮🇷Your username :"..msg.from.username.."\n🇮🇷You will be Mention by admin for your request ‼️"
+local txt2 = "🇮🇷 درخواست گروه 30 روزه شما به تیم مدیریت ارسال شد \n 🇮🇷Your Id :"..msg.from.id.."\n🇮🇷Your username :"..msg.from.username.."\n🇮🇷You will be Mention by admin for your request ‼️"
+local txt3 = "🇮🇷 درخواست گروه بی نهایت شما به تیم مدیریت ارسال شد \n 🇮🇷Your Id :"..msg.from.id.."\n🇮🇷Your username :"..msg.from.username.."\n🇮🇷You will be Mention by admin for your request ‼️"
+local chat = 'channel#id90285047'
+local text = "درخواست گروه 7 روزه از طرف"..msg.from.username.."🇮🇷"
+local text2 = "درخواست گروه 30 روزه از طرف"..msg.from.username.."🇮🇷"
+local text3 = "درخواست گروه بی نهایت از طرف"..msg.from.username.."🇮🇷"
 
-    if msg.text then
-	local hash = 'Group req:'..msg.from.id
-      if msg.text:match("^7$") and redis:get(hash) == "waite" then
-	  redis:set(hash, "ok")
-	elseif msg.text:match("^30$") and redis:get(hash) == "waite" then
-	  redis:set(hash, "ok")
-    elseif msg.text:match("^بی نهایت$") and redis:get(hash) == "waite" then
-	  redis:set(hash, "ok")
+if matches[1] == "group" and matches[2] == "1" then
+ send_large_msg(chat, text, ok_cb, false)
+ return txt
+ end
+ if matches[1] == "group" and matches[2] == "2" then
+ send_large_msg(chat, text2, ok_cb, false)
+ return txt2
+ end
+ if matches[1] == "group" and matches[2] == "3" then
+ send_large_msg(chat, text3, ok_cb, false)
+ return txt3
+ end
 
-      end
-    end
-	local text = "درخواست گروه جدید از گروه :"..msg.from.id.."گروه ="
-	local hash = 'Group req:'..msg.from.id
-	 if redis:get(hash) then
-        if redis:get(hash) == "ok" then
-		send_large_msg('channel#id1081784090', text, ok_cb, false)
-         return 'Your #GP req will be check !'
-        end
-      end
-    end
-
-return {
-  patterns = {
-  "[!/#]group",
-  "^7$",
-  "^30$",
-  "^بی نهایت$"
+ return {
+     patterns = {
+  "^[!/#]([Gg]roup) (1)$",
+    "^[!/#]([Gg]roup) (2)$",
+     "^[!/#]([Gg]roup) (3)$",
   },
-  run = run,
-}
+    run = run
+    }
+    end
