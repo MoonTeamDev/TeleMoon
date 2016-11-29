@@ -1,7 +1,7 @@
 do
 
 function run(msg, matches)
-  return [[<b>This bot created by</b> @Makan]
+  return [[<b>This bot created by</b> @Makan]]
 end
 return {
   description = "creator",
