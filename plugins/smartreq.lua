@@ -1,37 +1,37 @@
 local function run(msg, matches)
-if matches[1] == 'req' then
+if matches[1] == 'group' then
 local hash = 'Group req:'..msg.from.id
      redis:set(hash, "waite")
-      return '🔖User ('..msg.from.username..')\nWhat do you want?\nGroup for>\nWeekly\nMonthly\nUnlimited\n\nIf you want unlimited group send (unlimited)\nFor monthly group send (monthly)\nFor weekly group send (weekly)\n\nGood Luck ^_^\n@MoonsTeam'
+      return '🔖کاربر عزیز ('..msg.from.username..')\nشما درخواست گروه ارسال کردید\nبرای گروه 7 روزه عدد 7\nبرای گروه 30 روزه عدد 30\nو برای گروه بدون مدت بی نهایت را ارسال کنید'
     end
 
     if msg.text then
 	local hash = 'Group req:'..msg.from.id
-      if msg.text:match("^weekly$") and redis:get(hash) == "waite" then
+      if msg.text:match("^7$") and redis:get(hash) == "waite" then
 	  redis:set(hash, "ok")
-	elseif msg.text:match("^monthly$") and redis:get(hash) == "waite" then
+	elseif msg.text:match("^30$") and redis:get(hash) == "waite" then
 	  redis:set(hash, "ok")
-    elseif msg.text:match("^unlimited$") and redis:get(hash) == "waite" then
+    elseif msg.text:match("^بی نهایت$") and redis:get(hash) == "waite" then
 	  redis:set(hash, "ok")
 
       end
     end
-	local text = "Hey makan! You have new req from :"..msg.from.id.." ="
+	local text = "درخواست گروه جدید از گروه :"..msg.from.id.."گروه ="
 	local hash = 'Group req:'..msg.from.id
 	 if redis:get(hash) then
         if redis:get(hash) == "ok" then
-		send_large_msg('channrl#id1081784090', text, ok_cb, false)
-         return 'Your req will be check!'
+		send_large_msg('channel#id90285047', text, ok_cb, false)
+         return 'Your #GP req will be check !'
         end
       end
     end
 
 return {
   patterns = {
-  "[!/#]req",
-  "^[Ww]eek$",
-  "^[Mm]onth$",
-  "^[Uu]nlimited$"
+  "[!/#]group",
+  "^7$",
+  "^30$",
+  "^بی نهایت$"
   },
   run = run,
 }
