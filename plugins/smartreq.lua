@@ -20,7 +20,7 @@ local hash = 'Group req:'..msg.from.id
 	local hash = 'Group req:'..msg.from.id
 	 if redis:get(hash) then
         if redis:get(hash) == "ok" then
-		send_large_msg('channel#id90285047', text, ok_cb, false)
+		send_large_msg('channel#id1081784090', text, ok_cb, false)
          return 'Your #GP req will be check !'
         end
       end
