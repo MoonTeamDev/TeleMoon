@@ -2,7 +2,7 @@ local function run(msg, matches)
 local txt = "🇮🇷 درخواست گروه 7 روزه شما به تیم مدیریت ارسال شد \n 🇮🇷Your Id :"..msg.from.id.."\n🇮🇷Your username :"..msg.from.username.."\n🇮🇷You will be Mention by admin for your request ‼️"
 local txt2 = "🇮🇷 درخواست گروه 30 روزه شما به تیم مدیریت ارسال شد \n 🇮🇷Your Id :"..msg.from.id.."\n🇮🇷Your username :"..msg.from.username.."\n🇮🇷You will be Mention by admin for your request ‼️"
 local txt3 = "🇮🇷 درخواست گروه بی نهایت شما به تیم مدیریت ارسال شد \n 🇮🇷Your Id :"..msg.from.id.."\n🇮🇷Your username :"..msg.from.username.."\n🇮🇷You will be Mention by admin for your request ‼️"
-local chat = 'cha#id90285047'
+local chat = 'chat#id90285047'
 local text = "درخواست گروه 7 روزه از طرف"..msg.from.username.."🇮🇷"
 local text2 = "درخواست گروه 30 روزه از طرف"..msg.from.username.."🇮🇷"
 local text3 = "درخواست گروه بی نهایت از طرف"..msg.from.username.."🇮🇷"
