@@ -1,23 +1,19 @@
-
- function run(msg, matches) 
-      local text1 = matches[1] 
-     local text2 = matches[2]
-    local text3 = matches[3]
-      local url = "http://api.roonx.com/photo/shakh/pic2.php?text="..text1.."&color="..text2.."&size="..text3
-       local  file = download_to_file(url,'emoji.webp') 
-         send_document(get_receiver(msg), file, ok_cb, false) 
-
-end 
-
-return { 
-  description = "تبدیل متن به لوگو", 
-  usage = { 
-    "/logo text: ساخت لوگو", 
-  }, 
-  patterns = { 
-   "^[/!#][Pp]rofile> (.+) (.+) (.+)$", 
-  }, 
-  run = run 
-} 
-
---by @MoonsTeam , @Makan
+function run(msg, matches)
+if matches[1] == 'profile>' then
+  local moonsteam = matches[2]
+  local moonsteam2 = matches[3]
+  local moonsteam3 = matches[4]
+  local url = "http://api.roonx.com/photo/shakh/pic.php?text="..moonsteam.."&color="..moonsteam2.."&size="..moonsteam3
+  local ext = "emoji.webp"
+  local cb_extra = {file_path=file}
+  local receiver = get_receiver(msg)
+  local file = download_to_file(url, "emoji.webp")
+  send_document(receiver, file, rmtmp_cb, cb_extra)
+end
+   end
+return {
+  patterns = {
+   "[!#/](profile>) (.*) (.*) (.*)",
+  },
+  run = run
+}
