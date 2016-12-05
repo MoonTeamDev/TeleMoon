@@ -1,20 +1,31 @@
-do
-local function run(msg, matches)
-  local url = "http://tts.baidu.com/text2audio?lan=en&ie=UTF-8&text="..matches[1]
-  local receiver = get_receiver(msg)
-  local file = download_to_file(url,'text.ogg')
-      send_audio('channel#id'..msg.to.id, file, ok_cb , false)
-end
+local function urlencode(str)
+  str = string.gsub (str, "\n", "\r\n")
+  str = string.gsub (str, "([^%w ])",
+  function (c) return string.format ("%%%02X", string.byte(c)) end)
+    str = string.gsub (str, " ", "+")
+    return str
+  end
+  local function run(msg, matches)
+    if string.len(matches[2]) > 20 and not is_sudo(msg) then
+      return reply_msg(msg.id, "Only 20 charecters!", ok_cb, false)
+    end
 
-return {
-  description = "text to voice",
-  usage = {
-    "!voice [text]"
-  },
-  patterns = {
-    "^[!/#]voice (.+)$"
-  },
-  run = run
-}
+    if redis:get("voice:"..msg.to.id..":"..msg.from.id) and not is_sudo(msg) then
+      return reply_msg(msg.id, "please wait for 1min and try again!", ok_cb, false)
+    end
+    redis:setex("voice:"..msg.to.id..":"..msg.from.id, 60, true)
+    local text = matches[2]
+    local ent = urlencode(text)
+    local url = "http://api.farsireader.com/ArianaCloudService/ReadTextGET?APIKey=MQO0SC5GWITCRKR&Text="..ent.."&Speaker=Female1&Format=mp3%2F32%2Fm&GainLevel=0&PitchLevel=0&PunctuationLevel=0&SpeechSpeedLevel=0&ToneLevel=0"
+    local file = download_to_file(url, 'voice.ogg')
+    send_audio(get_receiver(msg), file, ok_cb, false)
+  end
 
-end
+  return {
+    patterns = {
+      "^[#!/]([Vv][Oo][Ii][Cc][Ee]) +(.*)$",
+    },
+    run = run
+  }
+  
+-- by @MoonsTeam , @Makan
