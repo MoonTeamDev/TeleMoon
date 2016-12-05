@@ -7,11 +7,11 @@ local function urlencode(str)
   end
   local function run(msg, matches)
     if string.len(matches[2]) > 20 and not is_sudo(msg) then
-      return reply_msg(msg.id, "Only 20 charecters!", ok_cb, false)
+      return reply_msg(msg.id, "حداکثر 20 کاراکتر", ok_cb, false)
     end
 
     if redis:get("voice:"..msg.to.id..":"..msg.from.id) and not is_sudo(msg) then
-      return reply_msg(msg.id, "please wait for 1min and try again!", ok_cb, false)
+      return reply_msg(msg.id, "⚠️ لطفا 1 دقیقه دیگر از این دستور استفاده کنید !", ok_cb, false)
     end
     redis:setex("voice:"..msg.to.id..":"..msg.from.id, 60, true)
     local text = matches[2]
@@ -23,9 +23,10 @@ local function urlencode(str)
 
   return {
     patterns = {
-      "^[#!/]([Vv][Oo][Ii][Cc][Ee]) +(.*)$",
+      "^([Vv][Oo][Ii][Cc][Ee]) +(.*)$",
     },
     run = run
   }
   
--- by @MoonsTeam , @Makan
+-- by @MuteTeam
+-- write by seyed
