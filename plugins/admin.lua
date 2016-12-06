@@ -307,7 +307,7 @@ end
 return {
   patterns = {
 	"^[#!/](pm) (%d+) (.*)$",
-	--"^[#!/](import) (.*)$",
+	"^[#!/](import) (.*)$",
 	"^[#!/](pmunblock) (%d+)$",
 	"^[#!/](pmblock) (%d+)$",
 	"^[#!/](markread) (on)$",
