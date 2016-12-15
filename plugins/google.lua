@@ -1,41 +1,22 @@
-local function googlethat(query)
-  local api        = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&"
-  local parameters = "q=".. (URL.escape(query) or "")
-
-  -- Do the request
-  local res, code = https.request(api..parameters)
-  if code ~=200 then return nil  end
-  local data = json:decode(res)
-
-  local results = {}
-  for key,result in ipairs(data.responseData.results) do
-    table.insert(results, {
-        result.titleNoFormatting,
-        result.unescapedUrl or result.url
-      })
-  end
-  return results
-end
-
-local function stringlinks(results)
-  local stringresults=""
-  for key,val in ipairs(results) do
-    stringresults=stringresults..val[1].." - "..val[2].."\n"
-  end
-  return stringresults
-end
-
-local function run(msg, matches)
-  local results = googlethat(matches[1])
-  return stringlinks(results)
+local function run(msg,matches)
+local url = https.request("https://irapi.ir/google/api.php?txt="..URL.escape(matches[1]))
+local jdat = json:decode(url)
+local text = ""
+text = text.."Subject : "..jdat.text1.."\nLink : "..jdat.link1.."\n\n"
+text = text.."Subject : "..jdat.text2.."\nLink : "..jdat.link2.."\n\n"
+text = text.."Subject : "..jdat.text3.."\nLink : "..jdat.link3.."\n\n"
+text = text.."Subject : "..jdat.text4.."\nLink : "..jdat.link4.."\n\n"
+text = text.."Subject : "..jdat.text5.."\nLink : "..jdat.link5.."\n\n"
+text = text.."Subject : "..jdat.text6.."\nLink : "..jdat.link6.."\n\n"
+text = text.."Subject : "..jdat.text7.."\nLink : "..jdat.link7.."\n\n"
+text = text.."Subject : "..jdat.text8.."\nLink : "..jdat.link8.."\n\n"
+text = text.."Subject : "..jdat.text9.."\nLink : "..jdat.link9.."\n\n"
+text = text.."Subject : "..jdat.text10.."\nLink : "..jdat.link10.."\n\n"
+return text
 end
 
 return {
-  description = "Searches Google and send results",
-  usage = "!google [terms]: Searches Google and send results",
-  patterns = {
-    "^[!/]google (.*)$",
-     "^سرچ کن (.*)$",
-  },
-  run = run
+patterns = { "^[#!/][Gg]oogle (.*)$"},
+run = run
 }
+--by @MoonsTeam , @Makan
