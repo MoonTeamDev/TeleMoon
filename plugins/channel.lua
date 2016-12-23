@@ -1,7 +1,7 @@
 local function run(msg,matches)
     if is_sudo(msg) then
-    local text = URL.escape(matches[2])
-    local channel_id = matches[1]  
+    local text = matches[1]
+    local channel_id = matches[2]  
       if res == 400 then
          reply_msg(msg.id, 'Error !', ok_cb, true)    
          else
@@ -11,7 +11,7 @@ local function run(msg,matches)
   end
   return {
       patterns = {
-          "^[!/#]send (.*)+(.*)$"
+          "^[!/#]send (.*) (.*)$"
           },
       run = run
   }
